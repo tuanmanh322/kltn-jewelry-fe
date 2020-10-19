@@ -24,9 +24,20 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss",
+              {
+               "input": "./node_modules/ngx-toastr/toastr.css",
+              },
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/slick-carousel/slick/slick.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.js",
+              "src/assets/js/jquery.flexisel.js",
+              "src/assets/js/jquery.flexslider.js",
+              "src/assets/js/jquery-ui.min.js",
+              "src/assets/js/memenu.js",
+            ]
           },
           "configurations": {
             "production": {
@@ -119,6 +130,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "fe-jewelry"
+    }
+  },
+  "defaultProject": "fe-jewelry",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Product} from '../../share/model/product';
+import {OwlOptions} from 'ngx-owl-carousel-o';
+import {ApiService} from '../../share/service/api.service';
 
 @Component({
   selector: 'app-product-sales',
@@ -6,10 +9,42 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-sales.component.css']
 })
 export class ProductSalesComponent implements OnInit {
+  productSaleList: Product[];
+  limit: number = 20; // <==== Edit this number to limit API results
+  customOptions: OwlOptions = {
+    loop: true,
+    autoplay: true,
+    center: true,
+    dots: false,
+    autoHeight: true,
+    autoWidth: true,
+    autoplayTimeout: 2000,
+    responsive: {
+      0: {
+        items: 5
+      },
+      600: {
+        items: 5
+      },
+      1000: {
+        items: 5
+      }
+    }
+  };
 
-  constructor() { }
+  constructor(
+    private apiService: ApiService
+  ) {
+  }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.fetch();
+  }
+
+  fetch() {
+    this.apiService.get('/product/index-sale').subscribe(data => {
+      this.productSaleList = data;
+    });
   }
 
 }

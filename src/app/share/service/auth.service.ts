@@ -2,57 +2,113 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {LoginModel} from '../model/login.model';
 import {environment} from '../../../environments/environment';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Router} from '@angular/router';
-import {TOKEN, USER} from '../model/jewelry.constant';
+import {CURRENT_USER, TOKEN} from '../model/jewelry.constant';
 import {UserProfileModel} from '../model/user-profile.model';
+import {ToastrService} from 'ngx-toastr';
+import {shareReplay} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private rememberMe: boolean;
-  userProfile: UserProfileModel;
+  rememberMe: boolean;
+  private _authState: BehaviorSubject<UserProfileModel>;
+  private _interruptedUrl: string;
+  private _initialData: string[] = [
+    TOKEN, 'interruptedUrl',
+  ];
 
   constructor(
     private http: HttpClient,
+    private toastr: ToastrService,
     private router: Router
   ) {
+    this._authState = new BehaviorSubject({});
   }
 
 
-  public login(login: LoginModel): Observable<any> {
+  login(login: LoginModel): Observable<any> {
     this.rememberMe = login.rememberMe;
-    return this.http.post<LoginModel>(`${environment.api_url}/login`, login, {observe: 'response'});
+    return this.http.post(`${environment.api_url}/authenticate`, login, {observe: 'response'})
+      .pipe(shareReplay(1));   // defaults to all values so we set it to just keep and replay last one
   }
 
-  public logOut() {
+  isLogin() {
+    let maThe = localStorage.getItem(TOKEN);
+    return !(maThe === null);
+  }
+
+  logOut() {
     localStorage.clear();
-    this.router.navigate(['']);
+    sessionStorage.clear();
   }
 
-  public getProfileUser() {
-    return this.http.get(`${environment.api_url}/profile-user`);
+  getProfile() {
+    return this.http.get(`${environment.api_url}/user/profile-user`);
   }
 
-  public getAuthenticated(): boolean {
+  public identity(force?: boolean): Promise<any> {
+    if (force) {
+      localStorage.removeItem(CURRENT_USER);
+    }
+    if (localStorage.getItem(CURRENT_USER)) {
+      const userJSON = localStorage.getItem(CURRENT_USER);
+      return Promise.resolve(JSON.parse(userJSON));
+    }
+    return this.getProfile().toPromise().then(profile => {
+        localStorage.setItem(CURRENT_USER, JSON.stringify(profile));
+        this.changeAuthState = profile;
+
+        return profile;
+      },
+      () => {
+        localStorage.removeItem(CURRENT_USER);
+        // this.changeAuthState = {};
+        this.toastr.error('System Error');
+        return {};
+      });
+  }
+
+  public set changeAuthState(newState: UserProfileModel) {
+    this._authState.next(newState);
+  }
+
+  public getAuthState(): Observable<any> {
+    return this._authState.asObservable();
+  }
+
+  public entranceUrl() {
+    // If the entrance url was interrupted.
+    this.router.navigate([this._interruptedUrl && this._interruptedUrl.length ? this._interruptedUrl : '/'])
+      .then(() => {
+        this._interruptedUrl = '';
+      });
+  }
+
+  hasAnyAuthority(authorities: string[]) {
+    const currentUser = this.currentUser();
+    if (!this.isAuthenticated() || !currentUser || !currentUser.role) {
+      return false;
+    }
+    return authorities.includes(currentUser.role);
+  }
+
+  private currentUser() {
+    if (!this.isAuthenticated()) {
+      return undefined;
+    }
+    const userJSON = localStorage.getItem(CURRENT_USER);
+    return JSON.parse(userJSON);
+  }
+
+  public isAuthenticated(): boolean {
+    // This method is required to implement authentication.
     return !!this.getToken();
   }
 
   getToken() {
     return localStorage.getItem(TOKEN);
-  }
-
-  saveToken(token: string) {
-    if (this.rememberMe) {
-      localStorage.setItem(TOKEN, token);
-    }
-  }
-
-  getCurrentUser() {
-    if (!this.getAuthenticated()) {
-      return undefined;
-    }
-    return JSON.parse(localStorage.getItem(USER));
   }
 }

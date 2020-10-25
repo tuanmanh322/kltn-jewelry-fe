@@ -280,27 +280,34 @@
         </section>
       </div>
     </div>
-    <h3 align="center">Related Products</h3>
-    <div class="row col-12">
-      <div class="arrivals">
-        <div class="arrival-grids">
-          <ngx-slick-carousel class="carousel"
-                              #slickModal="slick-carousel"
-                              [config]="slideConfig"
-                             >
-            <div ngxSlickItem *ngFor="let slide of slides" class="slide">
-              <a href="product.html"><img src="{{slide.img}}" alt=""/>
-                <div class="arrival-info">
-                  <h4>Jewellerys #1</h4>
-                  <p>Rs 12000</p>
-                  <span class="pric1"><del>Rs 18000</del></span>
-                  <span class="disc">[12% Off]</span>
+    <hr/>
+    <h3 align="center">Sản phẩm tương tự</h3>
+    <div class="arrivals">
+      <div class="container title-hr">
+        <div class="wrapper">
+          <owl-carousel-o [options]="customOptions">
+            <ng-container *ngFor="let product of productSaleList">
+              <ng-template class="slide" carouselSlide [id]="product.id">
+                <div class="feature-grids feature-grid jewel" >
+                  <a routerLink="/product-detail/{{product.id}}"><img [src]="product.imageProduct" [alt]="product.id"/>
+                    <div class="arrival-info">
+                      <h4>{{product.name}}</h4>
+                      <p class="pric1"><del>{{product.price | currency: 'vnd'}}</del></p>
+                      <span class="pric1"><del>Sale: </del></span>
+                      <span class="disc">{{product.saleName}}</span>
+                      <p>{{ (product.price - (product.price*product.codeSale))| currency:'vnd'}}</p>
+                    </div>
+                    <div class="viw">
+                      <a href="#"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>Sản phẩm tương tự</a>
+                    </div>
+                    <div class="shrt">
+                      <a href="#"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Add cart</a>
+                    </div>
+                  </a>
                 </div>
-                <div class="viw">
-                  <a href="#"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>Quick View</a>
-                </div></a>
-            </div>
-          </ngx-slick-carousel>
+              </ng-template>
+            </ng-container>
+          </owl-carousel-o>
         </div>
       </div>
     </div>

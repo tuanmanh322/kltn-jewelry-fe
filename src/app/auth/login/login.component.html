@@ -3,23 +3,29 @@
   <div class="container">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Login</li>
+        <li class="breadcrumb-item"><a routerLink="/">Trang chủ</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Đăng nhập</li>
       </ol>
     </nav>
-    <h2>Login</h2>
+    <h2>Đăng nhập</h2>
     <div class="col-md-6 log">
-      <p>Welcome, please enter the folling to continue.</p>
-      <p>If you have previously Login with us, <span>click here</span></p>
-      <form>
-        <h5>Username:</h5>
-        <input type="text" value="">
-        <h5>Password:</h5>
-        <input type="password" value="">
-        <input type="submit" value="Login">
-        <a class="acount-btn" routerLink="/register">Create an Account</a>
+      <p>Chào mừng, vui lòng nhập theo để tiếp tục.</p>
+      <p>Nếu trước đây bạn đã Đăng nhập với chúng tôi, <span>vào đây</span></p>
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <h5>Tên đăng nhập:</h5>
+        <input type="text"  placeholder="Nhập tên đăng nhập" formControlName="username" name="username">
+        <div class="text-danger" *ngIf="f.username.errors && (f.username.dirty || f.username.touched)">
+          <div *ngIf="f.username.errors.required">Bạn cần nhập vào tên đăng nhập</div>
+        </div>
+        <h5>Mật khẩu:</h5>
+        <input type="password"  placeholder="Nhập mật khẩu" name="password" formControlName="password">
+        <div class="text-danger" *ngIf="f.password.errors && (f.password.dirty || f.password.touched)">
+          <div *ngIf="f.password.errors.required">Bạn cần nhập vào mật khẩu</div>
+        </div>
+        <input type="submit" value="Đăng nhập">
+        <a class="acount-btn" routerLink="/register">Tạo tài khoản mới</a>
       </form>
-      <a routerLink="/">Forgot Password ?</a>
+      <a routerLink="/">Quên mật khẩu ?</a>
 
     </div>
 

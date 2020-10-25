@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -29,7 +29,13 @@ import {TinTucComponent} from './modules/tin-tuc/tin-tuc.component';
 import {ErrorPageComponent} from './share/error-page/error-page.component';
 import {TinTucDetailComponent} from './modules/tin-tuc-detail/tin-tuc-detail.component';
 import {HttpConfigInterceptor} from './share/intercepter/http-config.interceptor';
-import {SlickCarouselModule} from 'ngx-slick-carousel';
+import {ErrorInterceptor} from './share/intercepter/errror.interceptor';
+import {HasAnyAuthorityDirective} from './share/directive/has-any-auth.directive';
+import { PaginatorComponent } from './share/paginator/paginator.component';
+import {AuthService} from './share/service/auth.service';
+import {EventManagement} from './share/service/event.managements';
+import {StorageService} from './share/service/storage.service';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 @NgModule({
   declarations: [
@@ -53,6 +59,8 @@ import {SlickCarouselModule} from 'ngx-slick-carousel';
     TinTucComponent,
     ErrorPageComponent,
     TinTucDetailComponent,
+    HasAnyAuthorityDirective,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,
@@ -67,17 +75,23 @@ import {SlickCarouselModule} from 'ngx-slick-carousel';
     ReactiveFormsModule,
     FormsModule,
     AppRoutes,
-    SlickCarouselModule
+    CarouselModule
   ],
   providers: [
     ApiService,
-    {provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    AuthService,
+    EventManagement,
+    StorageService
   ],
   bootstrap: [AppComponent],
-  exports:  [
+  exports: [
     FooterComponent,
-    NavbarComponent
-  ]
+    NavbarComponent,
+    HasAnyAuthorityDirective
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {
 }

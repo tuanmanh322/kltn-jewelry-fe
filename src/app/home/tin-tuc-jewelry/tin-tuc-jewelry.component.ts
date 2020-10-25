@@ -26,14 +26,15 @@ export class TinTucJewelryComponent implements OnInit {
   ngOnInit(): void {
     this.apiService.get('/news/index').subscribe(res => {
       this.news = res;
-    });
-    for (let i = 0; i < this.news.length; i++) {
-      if (i <= 1) {
-        this.data1.push(this.news[i]);
-      }else {
-        this.data2.push(this.news[i]);
+      for (let i = 0; i < this.news.length; i++) {
+        if (i <= 1) {
+          this.data1.push(this.news[i]);
+        }else {
+          this.data2.push(this.news[i]);
+        }
       }
-    }
+    });
+
   }
 
 }

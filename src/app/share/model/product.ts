@@ -24,4 +24,8 @@ export interface Product {
   totalItem: number;
 
   idColor: number;
+
+  saleName: string;
+
+  codeSale: number;
 }

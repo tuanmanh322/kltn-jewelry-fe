@@ -12,7 +12,41 @@
       <div class="top_left">
         <ul>
           <li class="top_link">Email:<a href="mailto:thongpv@gmail.com">thongpv@gmail.com</a></li>|
-          <li class="top_link"><a routerLink="/login">Tài khoản của tôi</a></li>
+          <li class="top_link"><a *ngIf="!isAuthenticate" routerLink="/login">Tài khoản của tôi</a>
+<!--            <ul class="nav nav-tabs" *ngIf="isAuthenticate">-->
+<!--              <li class="dropdown">-->
+<!--                <a class="dropdown-toggle"-->
+<!--                   data-toggle="dropdown"-->
+<!--                   href="#">-->
+<!--                  {{userProfile.username}}-->
+<!--                  <b class="caret"></b>-->
+<!--                </a>-->
+<!--                <ul class="dropdown-menu">-->
+<!--                  <li>-->
+<!--                    <a routerLink="/profile-user">Trang cá nhân</a>-->
+<!--                  </li>-->
+<!--                  <li>-->
+<!--                    <a routerLink="/admin">Quản trị</a>-->
+<!--                  </li>-->
+<!--                  <li>-->
+<!--                    <a routerLink="" (click)="logOut()">Đăng xuất</a>-->
+<!--                  </li>-->
+<!--                </ul>-->
+<!--              </li>-->
+<!--            </ul>-->
+          </li>
+          <li>
+            <div class="dropdown" *ngIf="isAuthenticate">
+              <a type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                {{userProfile.username}}
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#" style="color: black!important;">Trang cá nhân</a>
+                <a class="dropdown-item" href="#" style="color: black!important;" *appHasAnyAuthority="['ROLE_ADMIN']">Quản trị</a>
+                <a class="dropdown-item" href="#" style="color: black!important;" (click)="logOut()">Đăng xuất</a>
+              </div>
+            </div>
+          </li>
         </ul>
       </div>
       <div class="clearfix"> </div>
@@ -23,7 +57,7 @@
   <div class="header-bottom">
     <div class="container">
       <div class="logo">
-        <a href=""><h1>Jewelry Store</h1></a>
+        <a routerLink=""><h1>Jewelry Store</h1></a>
       </div>
       <!---->
 

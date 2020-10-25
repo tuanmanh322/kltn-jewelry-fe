@@ -1,7 +1,7 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
-@import '~slick-carousel/slick/slick.scss';
-@import '~slick-carousel/slick/slick-theme.scss';
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+
 
 @import "assets/css/style.css";
 @import "assets/css/flexslider.css";
@@ -13,4 +13,23 @@
 
 a{
   text-decoration: none;
+}
+.title-news{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: black!important;
+}
+.title-hr .data-title{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  border-top: 1px solid #eee;
+  text-align: center;
+  height: 0px;
+  line-height: 0px;
+}
+
+.data-title {
+  background-color: #fff;
 }

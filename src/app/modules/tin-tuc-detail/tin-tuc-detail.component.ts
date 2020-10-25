@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {ApiService} from '../../share/service/api.service';
+import {NewsModel} from '../../share/model/news.model';
 
 @Component({
   selector: 'app-tin-tuc-detail',
@@ -6,10 +9,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tin-tuc-detail.component.css']
 })
 export class TinTucDetailComponent implements OnInit {
+  newDetail: NewsModel;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private apiService: ApiService
+  ) {
+  }
 
   ngOnInit(): void {
+    this.route.params.subscribe(res => {
+      const id = parseInt(res.id);
+      this.apiService.get('/news/detail/' + id).subscribe(ne => {
+        this.newDetail = ne;
+      });
+    });
   }
 
 }

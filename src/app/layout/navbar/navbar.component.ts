@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 import {AuthService} from '../../share/service/auth.service';
-import {ADMIN, ROLE, TITLE, USER_PROFILE_CHANGED} from '../../share/model/jewelry.constant';
+import {ADMIN, PRODUCT, ROLE, TITLE, USER_PROFILE_CHANGED} from '../../share/model/jewelry.constant';
 import {EventManagement} from '../../share/service/event.managements';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
@@ -9,6 +9,7 @@ import {StorageService} from '../../share/service/storage.service';
 import {ApiService} from '../../share/service/api.service';
 import {UserProfileModel} from '../../share/model/user-profile.model';
 import {Subscription} from 'rxjs';
+import {Product} from '../../share/model/product';
 
 @Component({
   selector: 'app-navbar',
@@ -25,6 +26,9 @@ export class NavbarComponent implements OnInit {
   titles = '';
   data = '';
   isLogin: boolean;
+  cart = [];
+  money = 0;
+  itemCount = 0;
 
   constructor(
     private router: Router,
@@ -59,6 +63,26 @@ export class NavbarComponent implements OnInit {
 
     this.apiService.$data.subscribe(data => {
       this.data = data;
+    });
+    setInterval(() => {
+      if (localStorage.getItem(PRODUCT)) {
+        this.money = 0;
+        this.cart = JSON.parse(localStorage.getItem(PRODUCT));
+        this.itemCount = this.cart.length;
+        this.cart.forEach(ca => {
+          this.money += ca.price;
+        });
+      }
+    }, 700);
+
+    this.apiService.$cart.subscribe(data => {
+      this.money = 0;
+      this.cart.push(data);
+      this.itemCount = this.cart.length;
+      this.cart.forEach(ca => {
+        this.money += ca.price;
+      });
+      localStorage.setItem(PRODUCT, JSON.stringify(this.cart));
     });
   }
 

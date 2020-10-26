@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable, Subject, throwError} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {catchError, retry} from 'rxjs/operators';
+import {Product} from '../model/product';
 
 
 @Injectable({
@@ -11,6 +12,9 @@ import {catchError, retry} from 'rxjs/operators';
 export class ApiService {
   public $data = new Subject<any>();
   sub = this.$data.asObservable();
+
+  public cart = new Subject<Product>();
+  $cart = this.cart.asObservable();
 
   private _listen = new Subject<any>();
 
@@ -75,4 +79,7 @@ export class ApiService {
     this.$data.next(data);
   }
 
+  sendCart(idCart){
+    this.cart.next(idCart);
+  }
 }

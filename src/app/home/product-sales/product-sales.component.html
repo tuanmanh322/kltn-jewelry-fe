@@ -6,9 +6,10 @@
         <ng-container *ngFor="let product of productSaleList">
           <ng-template class="slide" carouselSlide [id]="product.id">
             <div class="feature-grids feature-grid jewel" >
-              <a routerLink="/product-detail/{{product.id}}"><img [src]="product.imageProduct" [alt]="product.id"/>
                 <div class="arrival-info">
-                  <h4>{{product.name}}</h4>
+                  <a routerLink="/product-detail/{{product.id}}"><img [src]="product.imageProduct" [alt]="product.id"/>
+                    <h4>{{product.name}}</h4>
+                  </a>
                   <p class="pric1"><del>{{product.price | currency: 'vnd'}}</del></p>
                   <span class="pric1"><del>Sale: </del></span>
                   <span class="disc">{{product.saleName}}</span>
@@ -17,10 +18,9 @@
                 <div class="viw">
                   <a href="#"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>Sản phẩm tương tự</a>
                 </div>
-                <div class="shrt">
-                  <a href="#"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Add cart</a>
+                <div class="shrt" (click)="sendCart(product, product.price - (product.price*product.codeSale))" style="cursor: pointer;">
+                  <a style="cursor: pointer;color: rgba(149, 148, 148, 0.81) !important;"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Add cart</a>
                 </div>
-              </a>
             </div>
           </ng-template>
         </ng-container>

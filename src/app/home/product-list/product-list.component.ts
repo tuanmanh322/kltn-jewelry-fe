@@ -16,6 +16,7 @@ export class ProductListComponent implements OnInit {
   saleName = '';
 
   saleM: SaleModel[];
+
   constructor(
     private apiService: ApiService,
     private title: Title,
@@ -33,8 +34,10 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  getId(idSale){
-   this.saleM = this.sale.filter(s => s.id === idSale);
+  addToCart(product) {
+    this.apiService.sendCart(product);
+    this.toasrt.success('Thêm vào giỏ hàng thành công');
   }
+
 
 }

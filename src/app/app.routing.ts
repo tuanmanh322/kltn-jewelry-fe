@@ -10,6 +10,7 @@ import {ProductDetailComponent} from './modules/product-detail/product-detail.co
 import {TinTucDetailComponent} from './modules/tin-tuc-detail/tin-tuc-detail.component';
 import {LoginComponent} from './auth/login/login.component';
 import {RegisterComponent} from './auth/register/register.component';
+import {CartItemComponent} from './modules/cart/cart-item/cart-item.component';
 
 
 const routes: Routes = [
@@ -47,7 +48,7 @@ const routes: Routes = [
   },
   {
     path: 'cart',
-    component: CartComponent
+    component: CartItemComponent
   },
   {
     path: '**',

@@ -37,6 +37,7 @@
               "src/assets/js/jquery.flexslider.js",
               "src/assets/js/jquery-ui.min.js",
               "src/assets/js/memenu.js",
+              "src/assets/js/cart.js"
             ]
           },
           "configurations": {

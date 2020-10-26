@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Product} from '../../share/model/product';
 import {OwlOptions} from 'ngx-owl-carousel-o';
 import {ApiService} from '../../share/service/api.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-sales',
@@ -33,7 +34,8 @@ export class ProductSalesComponent implements OnInit {
   };
 
   constructor(
-    private apiService: ApiService
+    private apiService: ApiService,
+    private toast: ToastrService
   ) {
   }
 
@@ -45,6 +47,17 @@ export class ProductSalesComponent implements OnInit {
     this.apiService.get('/product/index-sale').subscribe(data => {
       this.productSaleList = data;
     });
+  }
+
+  sendCart(product, priceSale){
+    const productS ={
+      id: product.id,
+      price: priceSale,
+      imageProduct: product.imageProduct,
+      maSp: product.maSp
+    };
+    this.apiService.sendCart(productS);
+    this.toast.success('Thêm vào giỏ hàng thành công');
   }
 
 }

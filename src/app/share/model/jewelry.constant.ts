@@ -24,3 +24,4 @@ export const CURRENT_USER = 'CURRENT_USER';
 export const AUTHORITIES_KEY = 'Authorities';
 export const TITLE = 'TITLE';
 export const SESSIONID = 'SESSIONID';
+export const PRODUCT = 'PRODUCT';

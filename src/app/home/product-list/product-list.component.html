@@ -3,9 +3,10 @@
     <h3 class="data-title">Sản phẩm nổi bật</h3>
     <div class="row feature-grids">
       <div class="col-md-3 feature-grid jewel" *ngFor="let p of product">
-        <a routerLink="/product-detail/{{p.id}}"><img src="{{p.imageProduct}}" alt=""/>
           <div class="arrival-info">
+            <a routerLink="/product-detail/{{p.id}}"><img src="{{p.imageProduct}}" alt=""/>
             <h4>{{p.name}}</h4>
+            </a>
             <p>{{p.price | currency: 'vnd'}}</p>
             <span class="pric1"><strong>Mã Sản phẩm:</strong> </span>
             <span class="disc">{{p.maSp}}</span>
@@ -13,9 +14,9 @@
           <div class="viw">
             <a routerLink="/product-detail/{{p.id}}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>Sản phẩm tương tự</a>
           </div>
-          <div class="shrt">
-            <a href="product.html"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Add cart</a>
-          </div></a>
+          <div class="shrt" (click)="addToCart(p)" style="cursor: pointer">
+            <a style="cursor: pointer;color: rgba(149, 148, 148, 0.81) !important;" ><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Add cart</a>
+          </div>
       </div>
       <div class="clearfix"></div>
     </div>

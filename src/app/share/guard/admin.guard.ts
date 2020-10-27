@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import {AuthService} from '../service/auth.service';
 import {ToastrService} from 'ngx-toastr';
 import {UserProfileModel} from '../model/user-profile.model';
+import {StorageService} from '../service/storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class AdminGuard implements CanActivate {
   constructor(
     private auth: AuthService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private storageService: StorageService
   ) {
   }
 
@@ -21,7 +23,7 @@ export class AdminGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    this.userModel = JSON.parse(this.auth.getCurrentUser());
-    return !(!this.auth.getAuthenticated() && this.userModel.userRole !== 1);
+    this.userModel = this.storageService.getProfileJson();
+    return !(!this.auth.isAuthenticated() && this.userModel.userRole !== 1);
   }
 }

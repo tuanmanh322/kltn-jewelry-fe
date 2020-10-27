@@ -29,6 +29,8 @@ export class NavbarComponent implements OnInit {
   cart = [];
   money = 0;
   itemCount = 0;
+  cartd: Product;
+  cardPut = {};
 
   constructor(
     private router: Router,
@@ -67,20 +69,37 @@ export class NavbarComponent implements OnInit {
     setInterval(() => {
       if (localStorage.getItem(PRODUCT)) {
         this.money = 0;
+        this.itemCount = 0;
         this.cart = JSON.parse(localStorage.getItem(PRODUCT));
-        this.itemCount = this.cart.length;
-        this.cart.forEach(ca => {
-          this.money += ca.price;
-        });
+        if (this.cart.length > 0) {
+          this.cart.forEach(ca => {
+            this.money += ca.price * ca.quantity;
+            this.itemCount += ca.quantity;
+          });
+        }
       }
     }, 700);
 
-    this.apiService.$cart.subscribe(data => {
+    this.apiService.$cart.subscribe((data) => {
       this.money = 0;
-      this.cart.push(data);
-      this.itemCount = this.cart.length;
+      if (this.cart.findIndex(d => d.id === data.id) >= 0 && this.cart.length > 0) {
+        this.cartd = this.cart.filter((p: Product) => p.id === data.id)[0];
+        let pot = this.cart.findIndex(d => d.id === data.id);
+        this.cardPut = {
+          id: this.cartd.id,
+          imageProduct: this.cartd.imageProduct,
+          quantity: this.cartd.quantity + 1,
+          name: this.cartd.name,
+          maSp: this.cartd.maSp,
+          price: this.cartd.price
+        };
+        this.cart.splice(pot, 1, this.cardPut);
+      } else {
+        this.cart.push(data);
+      }
       this.cart.forEach(ca => {
-        this.money += ca.price;
+        this.money += ca.price * ca.quantity;
+        this.itemCount += ca.quantity;
       });
       localStorage.setItem(PRODUCT, JSON.stringify(this.cart));
     });

@@ -35,7 +35,15 @@ export class ProductListComponent implements OnInit {
   }
 
   addToCart(product) {
-    this.apiService.sendCart(product);
+    const datSend = {
+      id: product.id,
+      imageProduct: product.imageProduct,
+      price: product.price,
+      maSp: product.maSp,
+      name: product.name,
+      quantity: 1,
+    };
+    this.apiService.sendCart(datSend);
     this.toasrt.success('Thêm vào giỏ hàng thành công');
   }
 

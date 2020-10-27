@@ -11,6 +11,7 @@ import {TinTucDetailComponent} from './modules/tin-tuc-detail/tin-tuc-detail.com
 import {LoginComponent} from './auth/login/login.component';
 import {RegisterComponent} from './auth/register/register.component';
 import {CartItemComponent} from './modules/cart/cart-item/cart-item.component';
+import {CustomGuard} from './share/guard/custom.guard';
 
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [CustomGuard]
   },
   {
     path: 'register',

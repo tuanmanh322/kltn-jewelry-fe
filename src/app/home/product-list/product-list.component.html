@@ -7,7 +7,7 @@
             <a routerLink="/product-detail/{{p.id}}"><img src="{{p.imageProduct}}" alt=""/>
             <h4>{{p.name}}</h4>
             </a>
-            <p>{{p.price | currency: 'vnd'}}</p>
+            <p>{{p.price | vndTransfer}}</p>
             <span class="pric1"><strong>Mã Sản phẩm:</strong> </span>
             <span class="disc">{{p.maSp}}</span>
           </div>

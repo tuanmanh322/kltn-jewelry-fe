@@ -36,6 +36,7 @@ import {AuthService} from './share/service/auth.service';
 import {EventManagement} from './share/service/event.managements';
 import {StorageService} from './share/service/storage.service';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import {MoneyTransferPipe} from './share/pipe/money-transfer.pipe';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     ErrorPageComponent,
     TinTucDetailComponent,
     HasAnyAuthorityDirective,
-    PaginatorComponent
+    PaginatorComponent,
+    MoneyTransferPipe
   ],
   imports: [
     BrowserModule,

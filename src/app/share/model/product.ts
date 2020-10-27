@@ -28,4 +28,6 @@ export interface Product {
   saleName: string;
 
   codeSale: number;
+
+  quantity: number;
 }

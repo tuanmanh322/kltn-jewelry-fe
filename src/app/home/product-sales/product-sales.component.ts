@@ -54,7 +54,9 @@ export class ProductSalesComponent implements OnInit {
       id: product.id,
       price: priceSale,
       imageProduct: product.imageProduct,
-      maSp: product.maSp
+      maSp: product.maSp,
+      quantity: 1,
+      name: product.name
     };
     this.apiService.sendCart(productS);
     this.toast.success('Thêm vào giỏ hàng thành công');

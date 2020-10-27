@@ -1,53 +1,63 @@
 <app-navbar></app-navbar>
 <br>
 <div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Trang chủ</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
+    </ol>
+  </nav>
   <div class="shopping-cart">
 
     <div class="column-labels">
-      <label class="product-image">Image</label>
-      <label class="product-details">Product</label>
-      <label class="product-price">Price</label>
-      <label class="product-quantity">Quantity</label>
-      <label class="product-removal">Remove</label>
-      <label class="product-line-price">Total</label>
+      <label class="product-image">Ảnh</label>
+      <label class="product-details">Sản phẩm</label>
+      <label class="product-price">Giá</label>
+      <label class="product-quantity">Tổng số</label>
+      <label class="product-removal">Xóa</label>
+      <label class="product-line-price">Tổng cộng</label>
     </div>
 
     <div class="product" *ngFor="let p of productList; let i = index">
       <div class="product-image">
-        <img [src]="p.imageProduct">
+        <a routerLink="/product-detail/{{p.id}}">
+          <img [src]="p.imageProduct">
+        </a>
       </div>
       <div class="product-details">
-        <div class="product-title">{{p.name}}</div>
+        <a routerLink="/product-detail/{{p.id}}">
+          <div class="product-title">{{p.name}}</div>
+        </a>
         <p class="product-description"> {{p.maSp}}</p>
       </div>
-      <div class="product-price">{{p.price}}</div>
+      <div class="product-price">{{p.price | vndTransfer}}</div>
       <div class="product-quantity">
-        <input type="number" value="2" min="1" [(ngModel)]="quantity">
+        <input type="number" value="{{p.quantity}}" min="1" [(ngModel)]="p.quantity" (change)="getData(p)">
       </div>
       <div class="product-removal">
         <button class="remove-product" (click)="removeItem(i)">
-          Remove
+          Xóa
         </button>
       </div>
-      <div class="product-line-price">{{quantity * p.price}}</div>
+      <div class="product-line-price">{{(p.quantity * p.price)| vndTransfer}}</div>
     </div>
 
     <div class="totals">
       <div class="totals-item">
-        <label>Subtotal</label>
-        <div class="totals-value" id="cart-subtotal">71.97</div>
+        <label>Tổng phụ</label>
+        <div class="totals-value" id="cart-subtotal">{{priceTotal| vndTransfer}}</div>
       </div>
       <div class="totals-item">
-        <label>Tax (5%)</label>
-        <div class="totals-value" id="cart-tax">3.60</div>
+        <label>Thuế (5%)</label>
+        <div class="totals-value" id="cart-tax">{{(priceTotal * 0.05)| vndTransfer}}</div>
       </div>
       <div class="totals-item">
-        <label>Shipping</label>
-        <div class="totals-value" id="cart-shipping">15.00</div>
+        <label>Phí vận chuyển</label>
+        <div class="totals-value" id="cart-shipping">30,000đ</div>
       </div>
       <div class="totals-item totals-item-total">
-        <label>Grand Total</label>
-        <div class="totals-value" id="cart-total">90.57</div>
+        <label>Tổng cộng</label>
+        <div class="totals-value" id="cart-total">{{priceTotal + (priceTotal * 0.05) + 30000 | vndTransfer}}</div>
       </div>
     </div>
 

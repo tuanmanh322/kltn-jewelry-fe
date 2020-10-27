@@ -1,10 +1,14 @@
 <app-navbar></app-navbar>
 <div class="single-sec">
   <div class="container">
-    <ol class="breadcrumb">
-      <li><a href="index.html">Home</a></li>
-      <li class="active">Products</li>
-    </ol>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Trang chủ</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Sản phẩm</li>
+        <li class="breadcrumb-item active" aria-current="page">Chi tiết sản phẩm</li>
+        <li class="breadcrumb-item active" aria-current="page">Dây chuyền 4k</li>
+      </ol>
+    </nav>
     <!-- start content -->
     <div class="row">
       <div class="col-md-9 det">
@@ -292,7 +296,7 @@
                   <a routerLink="/product-detail/{{product.id}}"><img [src]="product.imageProduct" [alt]="product.id"/>
                     <div class="arrival-info">
                       <h4>{{product.name}}</h4>
-                      <p class="pric1"><del>{{product.price | currency: 'vnd'}}</del></p>
+                      <p class="pric1"><del>{{product.price | vndTransfer}}</del></p>
                       <span class="pric1"><del>Sale: </del></span>
                       <span class="disc">{{product.saleName}}</span>
                       <p>{{ (product.price - (product.price*product.codeSale))| currency:'vnd'}}</p>

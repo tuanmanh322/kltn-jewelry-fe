@@ -92,7 +92,6 @@ html *
 /* Apply clearfix in a few places */
 /* Apply dollar signs */
 .product .product-price:before, .product .product-line-price:before, .totals-value:before {
-  content: '$';
 }
 
 /* Body/Header stuff */
@@ -271,4 +270,8 @@ label {
   .totals .totals-item .totals-value {
     width: 40%;
   }
+}
+a{
+  cursor: pointer;
+  text-decoration: none;
 }

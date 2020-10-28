@@ -21,6 +21,7 @@
     "@angular/router": "~10.1.5",
     "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",
+    "ng5-slider": "^1.2.4",
     "ngx-owl-carousel-o": "4.0.0",
     "ngx-toastr": "^13.1.0",
     "popper.js": "^1.16.1",

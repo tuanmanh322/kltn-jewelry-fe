@@ -31,12 +31,13 @@ import {TinTucDetailComponent} from './modules/tin-tuc-detail/tin-tuc-detail.com
 import {HttpConfigInterceptor} from './share/intercepter/http-config.interceptor';
 import {ErrorInterceptor} from './share/intercepter/errror.interceptor';
 import {HasAnyAuthorityDirective} from './share/directive/has-any-auth.directive';
-import { PaginatorComponent } from './share/paginator/paginator.component';
+import {PaginatorComponent} from './share/paginator/paginator.component';
 import {AuthService} from './share/service/auth.service';
 import {EventManagement} from './share/service/event.managements';
 import {StorageService} from './share/service/storage.service';
-import { CarouselModule } from 'ngx-owl-carousel-o';
+import {CarouselModule} from 'ngx-owl-carousel-o';
 import {MoneyTransferPipe} from './share/pipe/money-transfer.pipe';
+import {Ng5SliderModule} from 'ng5-slider';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import {MoneyTransferPipe} from './share/pipe/money-transfer.pipe';
     ReactiveFormsModule,
     FormsModule,
     AppRoutes,
-    CarouselModule
+    CarouselModule,
+    Ng5SliderModule
   ],
   providers: [
     ApiService,

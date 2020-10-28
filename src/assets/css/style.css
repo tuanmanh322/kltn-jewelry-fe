@@ -707,7 +707,7 @@ ul.tabs-menu li.active a{
 	left:0;
 }
 .product-grid {
-	width: 30%;
+	width: 92%;
 	margin: 0 3% 4% 0;
 	float: left;
 	position: relative;
@@ -740,7 +740,7 @@ ul.tabs-menu li.active a{
 }
 .product-img img {
 	width: 100%;
-	padding:1em 2.5em 0;
+	padding:1em 2em 0;
 }
 .product-info-cust {
 	float: left;

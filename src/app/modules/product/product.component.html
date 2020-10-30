@@ -1,6 +1,4 @@
 <app-navbar></app-navbar>
-
-
 <div>
   <div class="container ">
     <nav aria-label="breadcrumb">
@@ -9,17 +7,25 @@
         <li class="breadcrumb-item active" aria-current="page">Sản phẩm</li>
       </ol>
     </nav>
-    <h2>Danh mục</h2>
+    <div class="row">
+      <h2 class="col-8">Danh mục</h2>
+      <div class="col-4">
+        <span class="float-right">Tổng số sản phẩm: <span style="color: #00a0dc;">{{totalItem}}</span></span>
+      </div>
+    </div>
     <div class="row">
       <div class="col-md-3">
         <section class="sky-form">
           <h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Loại sản phẩm</h4>
           <div class="row row1 scroll-pane">
             <div class="col col-12">
-              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>40% - 50% (5)</label>
-              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>30% - 20% (7)</label>
-              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>10% - 5% (2)</label>
-              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Other(50)</label>
+              <label class="checkbox" *ngFor="let cate of categoryList">
+                <input type="checkbox" value="{{cate.id}}" (click)="getIdCate($event,cate.id)"><i></i>
+                {{cate.name}}
+              </label>
+              <!--              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>30% - 20% (7)</label>-->
+              <!--              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>10% - 5% (2)</label>-->
+              <!--              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Other(50)</label>-->
             </div>
           </div>
         </section>
@@ -27,14 +33,17 @@
           <h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Sale</h4>
           <div class="row row1 scroll-pane">
             <div class="col col-12">
-              <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Upto - 10% (20)</label>
+              <label class="checkbox" *ngFor="let sa of saleList">
+                <input type="checkbox" name="checkbox" value="{{sa.id}}" (click)="getIdSale($event,sa.id)"><i></i>
+                {{sa.name}}
+              </label>
             </div>
-            <div class="col col-12">
-              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>40% - 50% (5)</label>
-              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>30% - 20% (7)</label>
-              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>10% - 5% (2)</label>
-              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Other(50)</label>
-            </div>
+            <!--            <div class="col col-12">-->
+            <!--              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>40% - 50% (5)</label>-->
+            <!--              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>30% - 20% (7)</label>-->
+            <!--              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>10% - 5% (2)</label>-->
+            <!--              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Other(50)</label>-->
+            <!--            </div>-->
           </div>
         </section>
         <section class="sky-form">
@@ -49,45 +58,52 @@
           <h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Chất liệu</h4>
           <div class="row row1 scroll-pane">
             <div class="col col-12">
-              <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>1 Gram Gold (30)</label>
+              <label class="checkbox" *ngFor="let co of colorList">
+                <input type="checkbox" name="checkbox" value="{{co.id}}" (click)="getIdColor($event,co.id)"><i></i>
+                {{co.name}}
+              </label>
             </div>
-            <div class="col col-12">
-              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Gold Plated (30)</label>
-              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Platinum (30)</label>
-              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Silver (30)</label>
-              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Jewellery Sets (30)</label>
-              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Stone Items (30)</label>
-            </div>
+            <!--            <div class="col col-12">-->
+            <!--              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Gold Plated (30)</label>-->
+            <!--              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Platinum (30)</label>-->
+            <!--              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Silver (30)</label>-->
+            <!--              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Jewellery Sets (30)</label>-->
+            <!--              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Stone Items (30)</label>-->
+            <!--            </div>-->
           </div>
         </section>
         <section class="sky-form">
           <h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Thương hiệu</h4>
           <div class="row row1 scroll-pane">
             <div class="col col-12">
-              <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Akasana Collectio</label>
+              <label class="checkbox" *ngFor="let tra of tradeMarkList">
+                <input type="checkbox" name="checkbox" value="{{tra.id}}" (click)="getIdTrade($event,tra.id)"><i></i>
+                {{tra.nameProduct}}
+              </label>
             </div>
-            <div class="col col-12">
-              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Colori</label>
-              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Crafts Hub</label>
-              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Jisha</label>
-              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Karatcart</label>
-              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Titan</label>
-              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Amuktaa</label>
-            </div>
+            <!--            <div class="col col-12">-->
+            <!--              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Colori</label>-->
+            <!--              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Crafts Hub</label>-->
+            <!--              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Jisha</label>-->
+            <!--              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Karatcart</label>-->
+            <!--              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Titan</label>-->
+            <!--              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Amuktaa</label>-->
+            <!--            </div>-->
           </div>
         </section>
       </div>
       <div class="col-md-9">
         <div class="row" style="border: 1px solid aliceblue;">
-          <div class="col-md-4 product-model-sec">
-            <a href="single.html"></a>
-            <div class="product-grid love-grid"><a href="single.html">
+          <div class="col-md-4 product-model-sec" *ngFor="let product of productList">
+            <a routerLink="/product-detail/{{product.id}}"></a>
+            <div class="product-grid love-grid data-remove"><a routerLink="/product-detail/{{product.id}}">
               <div class="more-product"><span> </span></div>
               <div class="product-img b-link-stripe b-animate-go  thickbox">
-                <img src="../../../assets/images/p1.jpg" class="img-responsive" alt="">
+                <img [src]="product.imageProduct" class="img-responsive" alt="">
                 <div class="b-wrapper">
                   <h4 class="b-animate b-from-left  b-delay03">
-                    <button class="btns"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Quick View
+                    <button class="btns"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Xem chi
+                      tiết
                     </button>
                   </h4>
                 </div>
@@ -95,17 +111,19 @@
             </a>
               <div class="product-info simpleCart_shelfItem">
                 <div class="product-info-cust prt_name">
-                  <h4>Jewellery #1</h4>
-                  <p>ID: SR4598</p>
-                  <span class="item_price">$187.95</span>
-                  <input type="text" class="item_quantity" value="1">
-                  <input type="button" class="item_add items" value="ADD">
+                  <h4  class="data-name">{{product.nameSP}}</h4>
+                  <p>ID: {{product.maSP}}</p>
+                  <span class="item_price">{{product.price | vndTransfer}}</span>
+                  <input type="button" class="item_add items" value="Add cart" (click)="addCart(product)">
                 </div>
                 <div class="clearfix"></div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+      <div style="margin: auto;width: 50%;padding: 10px;">
+        <app-paginator (searchFunction)="fetchData()" [searchObject]="productSearch"></app-paginator>
       </div>
     </div>
   </div>

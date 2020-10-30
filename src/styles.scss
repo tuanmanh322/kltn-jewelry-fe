@@ -7,9 +7,149 @@
 @import "assets/css/flexslider.css";
 @import "assets/css/form.css";
 @import "assets/css/memenu.css";
+//paginator
+.icon-feather-chevrons-right:before {
+  content: "\e934";
+}
+.icon-material-outline-keyboard-arrow-right:before {
+  content: "\e959";
+}
+.icon-material-outline-keyboard-arrow-left:before {
+  content: "\e958";
+}
+.icon-feather-chevrons-left:before {
+  content: "\e933";
+}
+.justify-content-center {
+  -webkit-box-pack: center !important;
+  -ms-flex-pack: center !important;
+  justify-content: center !important;
+}
 
+.d-flex {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+.margin-top-40  { margin-top: 40px !important; }
+.margin-bottom-40  { margin-bottom: 40px !important; }
 
+@media (max-width: 480px) {
+  .pagination ul li a {
+    border-radius: 3px;
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    line-height: 35px;
+    margin-left: 3px !important;
+  }
+  .pagination ul li a i {
+    line-height: 35px;
+    font-size: 15px;
+  }
+}
+.pagination {
+  margin: 0;
+  text-align: center;
+}
 
+.pagination-next-prev {
+  position: relative;
+  top: -66px;
+}
+
+.pagination ul {
+  margin: 0;
+  padding: 0;
+  li {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    a {
+      padding: 10px 0;
+      border-bottom: none;
+      display: inline-block;
+      color: #333;
+      background-color: transparent;
+      font-weight: 700;
+      margin: 0;
+      line-height: 22px;
+      -webkit-transition: all 200ms ease-in-out;
+      -moz-transition: all 200ms ease-in-out;
+      -o-transition: all 200ms ease-in-out;
+      -ms-transition: all 200ms ease-in-out;
+      transition: all 200ms ease-in-out;
+      font-size: 14px;
+      float: left;
+    }
+  }
+}
+
+.pagination-next-prev ul li a {
+  padding: 10px 0;
+  border-bottom: none;
+  display: inline-block;
+  color: #333;
+  background-color: transparent;
+  font-weight: 700;
+  margin: 0;
+  line-height: 22px;
+  -webkit-transition: all 200ms ease-in-out;
+  -moz-transition: all 200ms ease-in-out;
+  -o-transition: all 200ms ease-in-out;
+  -ms-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+  font-size: 14px;
+  float: left;
+}
+
+.pagination ul li {
+  a {
+    border-radius: 4px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    line-height: 44px;
+    i {
+      line-height: 44px;
+      font-size: 24px;
+    }
+  }
+  &.blank {
+    color: #a0a0a0;
+    padding: 0 6px;
+  }
+}
+
+.section.gray .pagination .pagination-arrow a:hover {
+  background-color: #333;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.pagination {
+  ul li a {
+    &.current-page, &:hover {
+      background-color: #333;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    &.current-page {
+      background-color:  #7767a7;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(102, 103, 107, 0.25);
+    }
+  }
+  .pagination-arrow a {
+    background-color: #f0f0f0;
+  }
+}
+
+.section.gray .pagination .pagination-arrow a {
+  background-color: #eaeaea;
+}
+
+//paginator
 a{
   text-decoration: none;
 }
@@ -28,7 +168,21 @@ a{
   height: 0px;
   line-height: 0px;
 }
-
+.data-name{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.data-name:hover{
+  text-overflow: clip;
+  white-space: normal;
+  word-break: break-all;
+}
+.data-remove:hover{
+  text-overflow: clip;
+  white-space: normal;
+  word-break: break-all;
+}
 .data-title {
   background-color: #fff;
 }

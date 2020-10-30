@@ -582,6 +582,11 @@ li.nbs-flexisel-item a:hover{
   margin: 4em 0 0 0;
   float: right;
 }
+.product-model-sec:hover {
+  text-overflow: clip;
+  white-space: normal;
+  word-break: break-all;
+}
 .glyphicon-minus{
 	top:-1px!important;
 }
@@ -635,6 +640,11 @@ ul.tabs-menu li.active a{
 	font-weight: 300;
 	overflow:hidden;
 	width: 100%;
+}
+.b-link-stripe:hover .data-name{
+  text-overflow: clip;
+  white-space: normal;
+  word-break: break-all;
 }
 .b-link-stripe .b-wrapper{
 	position:absolute;

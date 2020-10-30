@@ -1,6 +1,18 @@
 import {Component, EventEmitter, OnInit} from '@angular/core';
 import {ChangeContext, LabelType, Options, PointerType} from 'ng5-slider';
 import {FormControl} from '@angular/forms';
+import {Title} from '@angular/platform-browser';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ApiService} from '../../share/service/api.service';
+import {ProductSearchModel} from '../../share/model/product-search.model';
+import {Order} from '../../share/model/order';
+import {ProductDetailComponent} from '../product-detail/product-detail.component';
+import {CategoryModel} from '../../share/model/category.model';
+import {SaleModel} from '../../share/model/sale.model';
+import {TradeMarkModel} from '../../share/model/trade-mark.model';
+import {ColorModel} from '../../share/model/color.model';
+import {ProductSearchDetail} from '../../share/model/product-search-detail';
+import {ToastrService} from 'ngx-toastr';
 
 declare var $: any;
 
@@ -25,71 +37,87 @@ export class ProductComponent implements OnInit {
       }
     }
   };
-
-
-  priceChange: number = 0;
-  priceHigh: number = this.control.value[1];
-
+  order: Order = {
+    ascending: true,
+    property: ''
+  };
+  idColorList: number[] = [];
+  idCateList: number[] = [];
+  idMarkList : number[] = [];
+  idSaleList : number[] = [];
+  productSearch: ProductSearchModel = {
+    idCategory:[],
+    idColor: [],
+    idMark: [],
+    idSale: [],
+    name: '',
+    orders: [],
+    page: 0,
+    pageSize: 9,
+    totalRecords: 0,
+    priceFirst: null,
+    priceSecond: null
+  };
   priceLow = 0;
   priceMax = 0;
 
-  constructor() {
+  productList: ProductSearchDetail[];
+  categoryList: CategoryModel[];
+  saleList: SaleModel[];
+  tradeMarkList: TradeMarkModel[];
+  colorList: ColorModel[];
+  totalItem = 0;
+  constructor(
+    private title: Title,
+    private router: Router,
+    private route: ActivatedRoute,
+    private apiService: ApiService,
+    private toastr: ToastrService
+  ) {
   }
 
   ngOnInit(): void {
-    console.log(this.priceChange);
-    console.log(this.priceHigh);
-    // $(document).ready(function () {
-    //   $(".tab1 .single-bottom").hide();
-    //   $(".tab2 .single-bottom").hide();
-    //   $(".tab3 .single-bottom").hide();
-    //   $(".tab4 .single-bottom").hide();
-    //   $(".tab5 .single-bottom").hide();
-    //
-    //   $(".tab1 ul").click(function () {
-    //     $(".tab1 .single-bottom").slideToggle(300);
-    //     $(".tab2 .single-bottom").hide();
-    //     $(".tab3 .single-bottom").hide();
-    //     $(".tab4 .single-bottom").hide();
-    //     $(".tab5 .single-bottom").hide();
-    //   })
-    //   $(".tab2 ul").click(function () {
-    //     $(".tab2 .single-bottom").slideToggle(300);
-    //     $(".tab1 .single-bottom").hide();
-    //     $(".tab3 .single-bottom").hide();
-    //     $(".tab4 .single-bottom").hide();
-    //     $(".tab5 .single-bottom").hide();
-    //   })
-    //   $(".tab3 ul").click(function () {
-    //     $(".tab3 .single-bottom").slideToggle(300);
-    //     $(".tab4 .single-bottom").hide();
-    //     $(".tab5 .single-bottom").hide();
-    //     $(".tab2 .single-bottom").hide();
-    //     $(".tab1 .single-bottom").hide();
-    //   })
-    //   $(".tab4 ul").click(function () {
-    //     $(".tab4 .single-bottom").slideToggle(300);
-    //     $(".tab5 .single-bottom").hide();
-    //     $(".tab3 .single-bottom").hide();
-    //     $(".tab2 .single-bottom").hide();
-    //     $(".tab1 .single-bottom").hide();
-    //   })
-    //   $(".tab5 ul").click(function () {
-    //     $(".tab5 .single-bottom").slideToggle(300);
-    //     $(".tab4 .single-bottom").hide();
-    //     $(".tab3 .single-bottom").hide();
-    //     $(".tab2 .single-bottom").hide();
-    //     $(".tab1 .single-bottom").hide();
-    //   })
-    // });
+    this.title.setTitle('Trang sức');
+    this.productSearch.idSale = [];
+    this.productSearch.idMark = [];
+    this.productSearch.idColor = [];
+    this.productSearch.idCategory = [];
+    this.apiService.get('/category/all').subscribe(data => {
+      this.categoryList = data;
+    });
+    this.apiService.get('/color/all').subscribe(data => {
+      this.colorList = data;
+    });
+    this.apiService.get('/trade/all').subscribe(data => {
+      this.tradeMarkList = data;
+    });
+    this.apiService.get('/sale/all').subscribe(data => {
+      this.saleList = data;
+    });
+    this.fetchData();
   }
 
   onUserChange(changeContext: ChangeContext): void {
     this.priceLow = changeContext.value;
     this.priceMax = changeContext.highValue;
-    console.log('this.priceMax: ' + this.priceMax);
-    console.log('this.priceLow: ' + this.priceLow);
+    this.productSearch.priceFirst = this.priceLow;
+    this.productSearch.priceSecond = this.priceMax;
+    setTimeout(() => {
+      this.fetchData();
+    }, 1000);
+  }
 
+  fetchData(): void {
+    this.apiService.post('/product/search', this.productSearch).subscribe(data => {
+      this.productSearch = data;
+      this.productList = this.productSearch.data;
+      this.totalItem = this.productSearch.totalRecords;
+    });
+  }
+
+  searhProduct() {
+    this.productSearch.page = 0;
+    this.fetchData();
   }
 
   getChangeContextString(changeContext: ChangeContext): string {
@@ -98,4 +126,52 @@ export class ProductComponent implements OnInit {
       `highValue: ${changeContext.highValue}}`;
   }
 
+  addCart(product: ProductSearchDetail) {
+    const datSend = {
+      id: product.id,
+      imageProduct: product.imageProduct,
+      price: product.price,
+      maSp: product.maSP,
+      name: product.nameSP,
+      quantity: 1,
+    };
+    this.apiService.sendCart(datSend);
+    this.toastr.success('Đã vào giỏ hàng sản phẩm : ' + datSend.name);
+  }
+
+  getIdTrade(event,tra) {
+    if (event.target.checked){
+      this.productSearch.idMark.push(tra);
+    }else{
+      this.productSearch.idMark.splice(this.productSearch.idMark.indexOf(tra), 1);
+    }
+    this.fetchData();
+  }
+
+  getIdColor(event,co) {
+    if (event.target.checked){
+      this.productSearch.idColor.push(co);
+    }else{
+      this.productSearch.idColor.splice(this.productSearch.idColor.indexOf(co), 1);
+    }
+    this.fetchData();
+  }
+
+  getIdSale(event,sa) {
+    if (event.target.checked){
+      this.productSearch.idSale.push(sa);
+    }else{
+      this.productSearch.idSale.splice(this.productSearch.idSale.indexOf(sa), 1);
+    }
+    this.fetchData();
+  }
+
+  getIdCate(event,ca) {
+    if (event.target.checked){
+      this.productSearch.idCategory.push(ca);
+    }else{
+      this.productSearch.idCategory.splice(this.productSearch.idCategory.indexOf(ca), 1);
+    }
+    this.fetchData();
+  }
 }

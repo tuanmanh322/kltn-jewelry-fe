@@ -34,22 +34,38 @@
         </div>
         <div class="col-md-6 span_2_of_3">
           <div class="contact-form">
-            <form>
+            <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
               <div>
                 <span><label>Tên </label></span>
-                <span><input name="name" type="text" class="textbox"></span>
+                <span><input name="name" type="text" class="textbox" formControlName="name"></span>
+                <div class="text-danger" *ngIf="f.name.errors && (f.name.touched || f.name.dirty)">
+                  <div *ngIf="f.name.errors.required">Tên không được để trống!</div>
+                </div>
               </div>
               <div>
                 <span><label>E-MAIL</label></span>
-                <span><input name="email" type="text" class="textbox"></span>
+                <span><input name="email" type="text" class="textbox" formControlName="email"></span>
+                <div class="text-danger" *ngIf="f.email.errors && (f.email.touched || f.email.dirty)">
+                  <div *ngIf="f.email.errors.pattern">Email nhập vào không hợp lệ</div>
+                </div>
               </div>
               <div>
                 <span><label>Số điện thoại</label></span>
-                <span><input name="phone" type="text" class="textbox"></span>
+                <span><input name="phone" type="text" class="textbox" formControlName="phone"></span>
+                <div class="text-danger" *ngIf="f.phone.errors && (f.phone.touched || f.phone.dirty)">
+                  <div *ngIf="f.phone.errors.required">Số điện thoại không được để trống!</div>
+                  <div *ngIf="f.phone.errors.minlength">Số điện thoại phải có tối thiểu 10 số</div>
+                  <div *ngIf="f.phone.errors.maxlength">Số điện thoại nhập vào có tối đa 10 số</div>
+                  <div *ngIf="f.phone.errors.pattern">Ký tự nhập vào không hợp lệ</div>
+                </div>
               </div>
               <div>
                 <span><label>Nội dung</label></span>
-                <span><textarea name="content"> </textarea></span>
+                <span><textarea name="content" formControlName="content"> </textarea></span>
+                <div class="text-danger" *ngIf="f.content.errors && (f.content.touched || f.content.dirty)">
+                  <div *ngIf="f.content.errors.required">Nội dung không được để trống!</div>
+                  <div *ngIf="f.content.errors.maxlength">Nội dung nhập vào có tối đa 1000 số</div>
+                </div>
               </div>
               <div>
                 <span><input type="submit" class="mybutton" value="Gửi"></span>

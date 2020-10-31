@@ -1,7 +1,13 @@
-<div class="banner">
+  <owl-carousel-o [options]="customOptions">
+    <ng-container *ngFor="let slide of apiData">
+      <ng-template class="slide" carouselSlide>
+        <img [src]="slide" [alt]="" [title]="">
+      </ng-template>
+    </ng-container>
+  </owl-carousel-o>
   <div class="container">
+
   </div>
-</div>
 <!---->
 <div class="welcome">
   <div class="container">
@@ -35,29 +41,29 @@
         <div class="content-grid l-grids" *ngFor="let d of data1">
           <a routerLink="/news-detail/{{d.id}}">
             <figure class="effect-bubba">
-              <img src="{{d.image}}" alt=""/>
+              <img src="{{d.image}}" alt="" style="height: 325px!important;"/>
               <figcaption>
-                <h4>{{d.title}} </h4>
+                <h4 >{{d.title}} </h4>
                 <p>{{d.thumbnails}}</p>
               </figcaption>
             </figure>
           </a>
           <div class="clearfix"></div>
-          <h4 class="title-news">{{d.title}}</h4>
+          <a routerLink="/news-detail/{{d.id}}" class="text-decoration-none"> <h4 class="title-news">{{d.title}}</h4></a>
         </div>
       </div>
       <div class="col-md-4 bride-grid">
         <div class="content-grid l-grids">
-          <img src="../../../assets/images/brid.jpg" alt=""/>
+          <img src="../../../assets/images/gl-jewellery0_1308103796.jpg" alt="" style="height: 550px!important;"/>
 
-          <h3>Bridesmaid Dresses</h3>
+          <h3 align="center">Jewelry Store</h3>
         </div>
       </div>
       <div class="col-md-4 bride-grid">
         <div class="content-grid l-grids" *ngFor="let d of data2">
           <a routerLink="/news-detail/{{d.id}}">
             <figure class="effect-bubba">
-              <img src="{{d.image}}" alt=""/>
+              <img src="{{d.image}}" alt="" style="height: 325px!important;"/>
               <figcaption>
                 <h4>{{d.title}} </h4>
                 <p>{{d.thumbnails}}</p>
@@ -65,7 +71,7 @@
             </figure>
           </a>
           <div class="clearfix"></div>
-          <h4 class="title-news">{{d.title}}</h4>
+          <a routerLink="/news-detail/{{d.id}}" class="text-decoration-none"> <h4 class="title-news">{{d.title}}</h4></a>
         </div>
       </div>
     </div>

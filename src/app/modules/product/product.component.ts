@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ChangeContext, LabelType, Options, PointerType} from 'ng5-slider';
 import {FormControl} from '@angular/forms';
 import {Title} from '@angular/platform-browser';
@@ -6,7 +6,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../../share/service/api.service';
 import {ProductSearchModel} from '../../share/model/product-search.model';
 import {Order} from '../../share/model/order';
-import {ProductDetailComponent} from '../product-detail/product-detail.component';
 import {CategoryModel} from '../../share/model/category.model';
 import {SaleModel} from '../../share/model/sale.model';
 import {TradeMarkModel} from '../../share/model/trade-mark.model';
@@ -21,7 +20,7 @@ declare var $: any;
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
-export class ProductComponent implements OnInit, AfterViewInit {
+export class ProductComponent implements OnInit {
   @ViewChild('checkboxcate') checkbox: ElementRef;
 
   control: FormControl = new FormControl([0, 20000000]);
@@ -103,10 +102,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
     });
     this.fetchData();
-  }
-  ngAfterViewInit(): void {
-    this.checkbox.nativeElement.attribute.checked;
-    console.log(this.checkbox.nativeElement.value);
   }
 
   onUserChange(changeContext: ChangeContext): void {

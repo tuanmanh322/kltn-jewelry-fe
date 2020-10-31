@@ -39,6 +39,7 @@ import {CarouselModule} from 'ngx-owl-carousel-o';
 import {MoneyTransferPipe} from './share/pipe/money-transfer.pipe';
 import {Ng5SliderModule} from 'ng5-slider';
 import { ProfileUserComponent } from './modules/profile-user/profile-user.component';
+import { LoadSuccessComponent } from './modules/load-success/load-success.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { ProfileUserComponent } from './modules/profile-user/profile-user.compon
     HasAnyAuthorityDirective,
     PaginatorComponent,
     MoneyTransferPipe,
-    ProfileUserComponent
+    ProfileUserComponent,
+    LoadSuccessComponent
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,7 @@ import {CartItemComponent} from './modules/cart/cart-item/cart-item.component';
 import {CustomGuard} from './share/guard/custom.guard';
 import {CartOrderComponent} from './modules/cart/cart-order/cart-order.component';
 import {ProfileUserComponent} from './modules/profile-user/profile-user.component';
+import {LoadSuccessComponent} from './modules/load-success/load-success.component';
 
 
 const routes: Routes = [
@@ -55,12 +56,16 @@ const routes: Routes = [
     component: CartItemComponent
   },
   {
-    path: 'product/order/:id',
+    path: 'order',
     component: CartOrderComponent
   },
   {
     path: 'profile-user',
     component: ProfileUserComponent
+  },
+  {
+    path: 'load-success',
+    component: LoadSuccessComponent
   },
   {
     path: '**',

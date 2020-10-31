@@ -4,6 +4,7 @@ import {Product} from '../../../share/model/product';
 import {PRODUCT} from '../../../share/model/jewelry.constant';
 import {Title} from '@angular/platform-browser';
 import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-cart-item',
@@ -20,7 +21,8 @@ export class CartItemComponent implements OnInit, OnChanges {
   constructor(
     private apiService: ApiService,
     private title: Title,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {
   }
 
@@ -69,7 +71,7 @@ export class CartItemComponent implements OnInit, OnChanges {
     this.fetchData();
   }
 
-  fetchData() {
+  fetchData(): void {
     if (localStorage.getItem(PRODUCT)) {
       this.productList = JSON.parse(localStorage.getItem(PRODUCT));
     } else {
@@ -79,6 +81,14 @@ export class CartItemComponent implements OnInit, OnChanges {
     this.productList.forEach(pro => {
       this.priceTotal += pro.price * pro.quantity;
     });
+  }
+
+  goToOrder(): void{
+    if (this.productList.length === 0){
+      this.toastr.error('Giỏ hàng của bạn rỗng!');
+    }else{
+      this.router.navigate(['/order']);
+    }
   }
 
 

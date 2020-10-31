@@ -7,6 +7,21 @@
 @import "assets/css/flexslider.css";
 @import "assets/css/form.css";
 @import "assets/css/memenu.css";
+
+
+//cart
+
+.money-cart{
+  color: black;
+}
+.money-cart:hover{
+  color: coral;
+}
+//order
+
+
+//order
+
 //paginator
 .icon-feather-chevrons-right:before {
   content: "\e934";
@@ -159,6 +174,12 @@ a{
   text-overflow: ellipsis;
   color: black!important;
 }
+.title-news:hover{
+  text-overflow: clip;
+  white-space: normal;
+  word-break: break-all;
+  color: coral!important;
+}
 .title-hr .data-title{
   margin-top: 20px;
   margin-bottom: 20px;
@@ -207,11 +228,20 @@ html *
   width: 12%;
 }
 
+.product-price-order{
+  float: left;
+  width: 20%;
+}
+
 .product-quantity {
   float: left;
   width: 10%;
 }
 
+.product-quantity-order {
+  float: left;
+  width: 11%;
+}
 .product-removal {
   float: left;
   width: 9%;
@@ -273,7 +303,7 @@ label {
   border-bottom: 1px solid #eee;
 }
 .column-labels .product-image, .column-labels .product-details, .column-labels .product-removal {
-  text-indent: -9999px;
+  text-indent: 1px;
 }
 
 /* Product entries */

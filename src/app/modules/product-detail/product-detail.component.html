@@ -132,10 +132,11 @@
                   <a routerLink="/product-detail/{{product.id}}"><img [src]="product.imageProduct" [alt]="product.id"/>
                     <div class="arrival-info">
                       <h4>{{product.name}}</h4>
-                      <p class="pric1"><del>{{product.price | vndTransfer}}</del></p>
-                      <span class="pric1"><del>Sale: </del></span>
-                      <span class="disc">{{product.saleName}}</span>
-                      <p>{{ (product.price - (product.price*product.codeSale))| currency:'vnd'}}</p>
+                      <p class="pric1" *ngIf="!product.codeSale">{{product.price | vndTransfer}}</p>
+                      <p class="pric1" *ngIf="product.codeSale"><del>{{product.price | vndTransfer}}</del></p>
+                      <span class="pric1" *ngIf="product.codeSale"><del>Sale: </del></span>
+                      <span class="disc" *ngIf="product.codeSale">{{product.saleName}}</span>
+                      <p *ngIf="product.codeSale">{{ (product.price - (product.price*product.codeSale))| currency:'vnd'}}</p>
                     </div>
                     <div class="viw">
                       <a href="#"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>Sản phẩm tương tự</a>

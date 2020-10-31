@@ -16,6 +16,9 @@ export class ApiService {
   public cart = new Subject<Product>();
   $cart = this.cart.asObservable();
 
+  public $cate = new Subject<any>();
+  cate = this.$cate.asObservable();
+
   private _listen = new Subject<any>();
 
   constructor(
@@ -79,7 +82,11 @@ export class ApiService {
     this.$data.next(data);
   }
 
-  sendCart(idCart){
+  sendCart(idCart) {
     this.cart.next(idCart);
+  }
+
+  sendCate(id) {
+    this.$cate.next(id);
   }
 }

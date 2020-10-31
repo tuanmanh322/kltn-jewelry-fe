@@ -3,16 +3,16 @@
     <div class="shpng-grids">
       <div class="row">
         <div class="col-md-4 shpng-grid">
-          <h3>Free Shipping</h3>
-          <p>On Order Over Rs999</p>
+          <h3>Vận chuyển nhanh chóng</h3>
+          <p>Đảm bảo về sản phẩm</p>
         </div>
         <div class="col-md-4 shpng-grid">
-          <h3>Order Return</h3>
-          <p>Return Within 14days</p>
+          <h3>Trả lại đơn hàng</h3>
+          <p>Trả lại trong vòng 8 ngày</p>
         </div>
         <div class="col-md-4 shpng-grid">
           <h3>COD</h3>
-          <p>Cash On Delivery</p>
+          <p>Thanh toán khi giao hàng</p>
         </div>
       </div>
       <div class="clearfix"></div>
@@ -24,46 +24,37 @@
   <div class="container">
     <div class="row ftr-grids">
       <div class="col-md-3 ftr-grid">
-        <h4>About Us</h4>
+        <h4>Về chúng tôi</h4>
         <ul>
-          <li><a href="#">Who We Are</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
-          <li><a href="#">Our Sites</a></li>
-          <li><a href="#">In The News</a></li>
-          <li><a href="#">Team</a></li>
-          <li><a href="#">Careers</a></li>
+          <li><a routerLink="">Chúng tôi là</a></li>
+          <li><a routerLink="/contact">Liên hệ với chúng tôi</a></li>
+          <li><a routerLink="/news">Tin tức</a></li>
+          <li><a routerLink="#">Nghề nghiệp</a></li>
         </ul>
       </div>
       <div class="col-md-3 ftr-grid">
-        <h4>Customer service</h4>
+        <h4>Dịch vụ khách hàng</h4>
         <ul>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">Shipping</a></li>
-          <li><a href="#">Cancellation</a></li>
-          <li><a href="#">Returns</a></li>
-          <li><a href="#">Bulk Orders</a></li>
-          <li><a href="#">Buying Guides</a></li>
+          <li><a routerLink="">FAQ</a></li>
+          <li><a routerLink="">Vận chuyển</a></li>
+          <li><a routerLink="">Hủy bỏ</a></li>
+          <li><a routerLink="">Trả lại</a></li>
+          <li><a routerLink="">Đơn đặt hàng số lượng lớn</a></li>
+          <li><a routerLink="">Mua sắm theo phong cách</a></li>
         </ul>
       </div>
       <div class="col-md-3 ftr-grid">
-        <h4>Your account</h4>
+        <h4>Tài khoản của bạn</h4>
         <ul>
-          <li><a href="account.html">Your Account</a></li>
-          <li><a href="#">Personal Information</a></li>
-          <li><a href="#">Addresses</a></li>
-          <li><a href="#">Discount</a></li>
-          <li><a href="#">Track your order</a></li>
+          <li><a routerLink="profile-user">Your Account</a></li>
+          <li><a routerLink="/cart">Giỏ hàng</a></li>
+          <li><a routerLink="/product/order">Kiểm tra checkout</a></li>
         </ul>
       </div>
       <div class="col-md-3 ftr-grid">
-        <h4>Categories</h4>
+        <h4>Thể loại</h4>
         <ul>
-          <li><a href="#"> Wedding</a></li>
-          <li><a href="#"> Jewellerys</a></li>
-          <li><a href="#"> Shoes</a></li>
-          <li><a href="#"> Flowers</a></li>
-          <li><a href="#"> Cakes</a></li>
-          <li><a href="#">...More</a></li>
+          <li *ngFor="let ca of categoryList"><a routerLink="/product" (click)="sendCate(ca.id)">{{ca.name}}</a></li>
         </ul>
       </div>
       <div class="clearfix"></div>
@@ -73,6 +64,6 @@
 <!---->
 <div class="copywrite">
   <div class="container">
-    <p>Copyright © 2015 Wedding Store. All Rights Reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+    <p>Copyright © 2020 Jewelry Store. All Rights Reserved | Design by <a href="https://mail.google.com/mail">thonglv@gmail.com</a></p>
   </div>
 </div>

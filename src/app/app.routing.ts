@@ -12,6 +12,8 @@ import {LoginComponent} from './auth/login/login.component';
 import {RegisterComponent} from './auth/register/register.component';
 import {CartItemComponent} from './modules/cart/cart-item/cart-item.component';
 import {CustomGuard} from './share/guard/custom.guard';
+import {CartOrderComponent} from './modules/cart/cart-order/cart-order.component';
+import {ProfileUserComponent} from './modules/profile-user/profile-user.component';
 
 
 const routes: Routes = [
@@ -51,6 +53,14 @@ const routes: Routes = [
   {
     path: 'cart',
     component: CartItemComponent
+  },
+  {
+    path: 'product/order/:id',
+    component: CartOrderComponent
+  },
+  {
+    path: 'profile-user',
+    component: ProfileUserComponent
   },
   {
     path: '**',

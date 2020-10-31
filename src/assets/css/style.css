@@ -811,6 +811,12 @@ span.item_price{
 	font-weight:600;
 	font-size:1em;
 }
+
+p.item_price{
+  color:#000;
+  font-weight:600;
+  font-size:1em;
+}
 .tab-grids {
 	margin-top: 2em;
 }

@@ -20,7 +20,7 @@
           <div class="row row1 scroll-pane">
             <div class="col col-12">
               <label class="checkbox" *ngFor="let cate of categoryList">
-                <input type="checkbox" value="{{cate.id}}" (click)="getIdCate($event,cate.id)"><i></i>
+                <input type="checkbox" value="{{cate.id}}" [checked]="cateId" #checkboxcate (click)="getIdCate($event,cate.id)"><i></i>
                 {{cate.name}}
               </label>
               <!--              <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>30% - 20% (7)</label>-->
@@ -113,7 +113,9 @@
                 <div class="product-info-cust prt_name">
                   <h4  class="data-name">{{product.nameSP}}</h4>
                   <p>ID: {{product.maSP}}</p>
-                  <span class="item_price">{{product.price | vndTransfer}}</span>
+                  <p  *ngIf="!product.codeSale" class="item_price">{{product.price | vndTransfer}}</p>
+                  <span *ngIf="product.codeSale" class="pric1"><del>{{product.price | vndTransfer}}</del></span>
+                  <span class="item_price" *ngIf="product.codeSale">{{ (product.price - (product.price*product.codeSale))| vndTransfer}}</span>
                   <input type="button" class="item_add items" value="Add cart" (click)="addCart(product)">
                 </div>
                 <div class="clearfix"></div>

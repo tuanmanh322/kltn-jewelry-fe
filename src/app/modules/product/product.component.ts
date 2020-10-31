@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, OnInit, ViewChild} from '@angular/core';
 import {ChangeContext, LabelType, Options, PointerType} from 'ng5-slider';
 import {FormControl} from '@angular/forms';
 import {Title} from '@angular/platform-browser';
@@ -21,7 +21,9 @@ declare var $: any;
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit, AfterViewInit {
+  @ViewChild('checkboxcate') checkbox: ElementRef;
+
   control: FormControl = new FormControl([0, 20000000]);
   options: Options = {
     floor: 0,
@@ -43,10 +45,10 @@ export class ProductComponent implements OnInit {
   };
   idColorList: number[] = [];
   idCateList: number[] = [];
-  idMarkList : number[] = [];
-  idSaleList : number[] = [];
+  idMarkList: number[] = [];
+  idSaleList: number[] = [];
   productSearch: ProductSearchModel = {
-    idCategory:[],
+    idCategory: [],
     idColor: [],
     idMark: [],
     idSale: [],
@@ -67,6 +69,7 @@ export class ProductComponent implements OnInit {
   tradeMarkList: TradeMarkModel[];
   colorList: ColorModel[];
   totalItem = 0;
+  cateId = 0;
   constructor(
     private title: Title,
     private router: Router,
@@ -94,7 +97,16 @@ export class ProductComponent implements OnInit {
     this.apiService.get('/sale/all').subscribe(data => {
       this.saleList = data;
     });
+    this.apiService.cate.subscribe(data => {
+      this.productSearch.idCategory.push(data);
+      this.cateId = data;
+
+    });
     this.fetchData();
+  }
+  ngAfterViewInit(): void {
+    this.checkbox.nativeElement.attribute.checked;
+    console.log(this.checkbox.nativeElement.value);
   }
 
   onUserChange(changeContext: ChangeContext): void {
@@ -139,37 +151,37 @@ export class ProductComponent implements OnInit {
     this.toastr.success('Đã vào giỏ hàng sản phẩm : ' + datSend.name);
   }
 
-  getIdTrade(event,tra) {
-    if (event.target.checked){
+  getIdTrade(event, tra) {
+    if (event.target.checked) {
       this.productSearch.idMark.push(tra);
-    }else{
+    } else {
       this.productSearch.idMark.splice(this.productSearch.idMark.indexOf(tra), 1);
     }
     this.fetchData();
   }
 
-  getIdColor(event,co) {
-    if (event.target.checked){
+  getIdColor(event, co) {
+    if (event.target.checked) {
       this.productSearch.idColor.push(co);
-    }else{
+    } else {
       this.productSearch.idColor.splice(this.productSearch.idColor.indexOf(co), 1);
     }
     this.fetchData();
   }
 
-  getIdSale(event,sa) {
-    if (event.target.checked){
+  getIdSale(event, sa) {
+    if (event.target.checked) {
       this.productSearch.idSale.push(sa);
-    }else{
+    } else {
       this.productSearch.idSale.splice(this.productSearch.idSale.indexOf(sa), 1);
     }
     this.fetchData();
   }
 
-  getIdCate(event,ca) {
-    if (event.target.checked){
+  getIdCate(event, ca) {
+    if (event.target.checked) {
       this.productSearch.idCategory.push(ca);
-    }else{
+    } else {
       this.productSearch.idCategory.splice(this.productSearch.idCategory.indexOf(ca), 1);
     }
     this.fetchData();

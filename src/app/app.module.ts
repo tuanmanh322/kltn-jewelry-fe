@@ -38,6 +38,7 @@ import {StorageService} from './share/service/storage.service';
 import {CarouselModule} from 'ngx-owl-carousel-o';
 import {MoneyTransferPipe} from './share/pipe/money-transfer.pipe';
 import {Ng5SliderModule} from 'ng5-slider';
+import { ProfileUserComponent } from './modules/profile-user/profile-user.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import {Ng5SliderModule} from 'ng5-slider';
     TinTucDetailComponent,
     HasAnyAuthorityDirective,
     PaginatorComponent,
-    MoneyTransferPipe
+    MoneyTransferPipe,
+    ProfileUserComponent
   ],
   imports: [
     BrowserModule,

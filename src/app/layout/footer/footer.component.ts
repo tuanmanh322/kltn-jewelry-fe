@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ApiService} from '../../share/service/api.service';
+import {CategoryModel} from '../../share/model/category.model';
 
 @Component({
   selector: 'app-footer',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-
-  constructor() { }
+  categoryList: CategoryModel[];
+  constructor(
+    private apiService: ApiService
+  ) { }
 
   ngOnInit(): void {
+    this.apiService.get('/category/all').subscribe(res => {
+      this.categoryList = res;
+    });
+  }
+  sendCate(id){
+    this.apiService.sendCate(id);
   }
 
 }

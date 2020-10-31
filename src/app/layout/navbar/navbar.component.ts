@@ -10,6 +10,7 @@ import {ApiService} from '../../share/service/api.service';
 import {UserProfileModel} from '../../share/model/user-profile.model';
 import {Subscription} from 'rxjs';
 import {Product} from '../../share/model/product';
+import {CategoryModel} from '../../share/model/category.model';
 
 @Component({
   selector: 'app-navbar',
@@ -31,6 +32,7 @@ export class NavbarComponent implements OnInit {
   itemCount = 0;
   cartd: Product;
   cardPut = {};
+  categoryList: CategoryModel[];
 
   constructor(
     private router: Router,
@@ -102,6 +104,10 @@ export class NavbarComponent implements OnInit {
         this.itemCount += ca.quantity;
       });
       localStorage.setItem(PRODUCT, JSON.stringify(this.cart));
+    });
+
+    this.apiService.get('/category/all').subscribe(res => {
+      this.categoryList = res;
     });
   }
 

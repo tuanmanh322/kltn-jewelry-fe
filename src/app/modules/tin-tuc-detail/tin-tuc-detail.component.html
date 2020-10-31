@@ -1,4 +1,14 @@
 <app-navbar></app-navbar>
+<div class="container">
+  <div class="row">
+    <div class="col-10">
+      <h3>{{newDetail.title}}</h3>
+      <p>{{newDetail.createdDate | date:'dd/MM/yyyy'}}</p>
+      <div [innerHTML]="newDetail.content">
 
+      </div>
+    </div>
+  </div>
+</div>
 
 <app-footer></app-footer>

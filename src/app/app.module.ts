@@ -23,7 +23,6 @@ import {CartComponent} from './modules/cart/cart.component';
 import {CartItemComponent} from './modules/cart/cart-item/cart-item.component';
 import {CartOrderComponent} from './modules/cart/cart-order/cart-order.component';
 import {ProductComponent} from './modules/product/product.component';
-import {AdminComponent} from './admin/admin.component';
 import {ProductDetailComponent} from './modules/product-detail/product-detail.component';
 import {TinTucComponent} from './modules/tin-tuc/tin-tuc.component';
 import {ErrorPageComponent} from './share/error-page/error-page.component';
@@ -38,8 +37,35 @@ import {StorageService} from './share/service/storage.service';
 import {CarouselModule} from 'ngx-owl-carousel-o';
 import {MoneyTransferPipe} from './share/pipe/money-transfer.pipe';
 import {Ng5SliderModule} from 'ng5-slider';
-import { ProfileUserComponent } from './modules/profile-user/profile-user.component';
-import { LoadSuccessComponent } from './modules/load-success/load-success.component';
+import {ProfileUserComponent} from './modules/profile-user/profile-user.component';
+import {LoadSuccessComponent} from './modules/load-success/load-success.component';
+import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
+import {AutoCompleteService} from './share/service/auto-complete.service';
+import {ListCartComponent} from './admin/cart/list-cart/list-cart.component';
+import {CategoryCreateComponent} from './admin/category/category-create/category-create.component';
+import {CategoryEditComponent} from './admin/category/category-edit/category-edit.component';
+import {ColorCreateComponent} from './admin/color/color-create/color-create.component';
+import {ColorEditComponent} from './admin/color/color-edit/color-edit.component';
+import {NewsCreateComponent} from './admin/news/news-create/news-create.component';
+import {NewsEditComponent} from './admin/news/news-edit/news-edit.component';
+import {ProductCreateComponent} from './admin/product/product-create/product-create.component';
+import {ProductEditComponent} from './admin/product/product-edit/product-edit.component';
+import {SaleCreateComponent} from './admin/sale/sale-create/sale-create.component';
+import {SaleEditComponent} from './admin/sale/sale-edit/sale-edit.component';
+import {TradeCreateComponent} from './admin/trade-mark/trade-create/trade-create.component';
+import {TradeEditComponent} from './admin/trade-mark/trade-edit/trade-edit.component';
+import {UserCreateComponent} from './admin/user/user-create/user-create.component';
+import {UserEditComponent} from './admin/user/user-edit/user-edit.component';
+import {UserListComponent} from './admin/user/user-list/user-list.component';
+import {TradeListComponent} from './admin/trade-mark/trade-list/trade-list.component';
+import {SaleListComponent} from './admin/sale/sale-list/sale-list.component';
+import {OrderListComponent} from './admin/orders/order-list/order-list.component';
+import {NewsListComponent} from './admin/news/news-list/news-list.component';
+import {ContactListComponent} from './admin/contact/contact-list/contact-list.component';
+import {ColorListComponent} from './admin/color/color-list/color-list.component';
+import {ListCategoryComponent} from './admin/category/list-category/list-category.component';
+import {AdminComponent} from './admin/admin/admin.component';
+import {ProductListAdminComponent} from './admin/product/product-list-admin/product-list-admin.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +84,6 @@ import { LoadSuccessComponent } from './modules/load-success/load-success.compon
     CartItemComponent,
     CartOrderComponent,
     ProductComponent,
-    AdminComponent,
     ProductDetailComponent,
     TinTucComponent,
     ErrorPageComponent,
@@ -67,7 +92,34 @@ import { LoadSuccessComponent } from './modules/load-success/load-success.compon
     PaginatorComponent,
     MoneyTransferPipe,
     ProfileUserComponent,
-    LoadSuccessComponent
+    LoadSuccessComponent,
+    ListCartComponent,
+    CategoryCreateComponent,
+    CategoryEditComponent,
+    ColorCreateComponent,
+    ColorEditComponent,
+    NewsCreateComponent,
+    NewsEditComponent,
+    ProductCreateComponent,
+    ProductEditComponent,
+    SaleCreateComponent,
+    SaleEditComponent,
+    TradeCreateComponent,
+    TradeEditComponent,
+    UserCreateComponent,
+    UserEditComponent,
+    UserListComponent,
+    TradeListComponent,
+    SaleListComponent,
+    SaleListComponent,
+    ProductListComponent,
+    OrderListComponent,
+    NewsListComponent,
+    ContactListComponent,
+    ColorListComponent,
+    ListCategoryComponent,
+    AdminComponent,
+    ProductListAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +135,8 @@ import { LoadSuccessComponent } from './modules/load-success/load-success.compon
     FormsModule,
     AppRoutes,
     CarouselModule,
-    Ng5SliderModule
+    Ng5SliderModule,
+    CKEditorModule
   ],
   providers: [
     ApiService,
@@ -91,7 +144,8 @@ import { LoadSuccessComponent } from './modules/load-success/load-success.compon
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     AuthService,
     EventManagement,
-    StorageService
+    StorageService,
+    AutoCompleteService
   ],
   bootstrap: [AppComponent],
   exports: [

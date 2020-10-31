@@ -8,9 +8,12 @@ import {Title} from '@angular/platform-browser';
 import {StorageService} from '../../share/service/storage.service';
 import {ApiService} from '../../share/service/api.service';
 import {UserProfileModel} from '../../share/model/user-profile.model';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {Product} from '../../share/model/product';
 import {CategoryModel} from '../../share/model/category.model';
+import {AutoCompleteService} from '../../share/service/auto-complete.service';
+import {FormControl} from '@angular/forms';
+import {debounceTime, distinctUntilChanged, switchMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -33,6 +36,10 @@ export class NavbarComponent implements OnInit {
   cartd: Product;
   cardPut = {};
   categoryList: CategoryModel[];
+  namePro: Observable<Product[] | Observable<Product[]>>;
+
+  name = new FormControl();
+  clickSearch = false;
 
   constructor(
     private router: Router,
@@ -44,7 +51,8 @@ export class NavbarComponent implements OnInit {
     private storageService: StorageService,
     private userService: AuthService,
     private apiService: ApiService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private autoComplete: AutoCompleteService
   ) {
   }
 
@@ -63,7 +71,13 @@ export class NavbarComponent implements OnInit {
     this.userService.getAuthState().subscribe(() => {
       this.getProfile();
     });
-
+    this.namePro = this.name.valueChanges.pipe(
+      debounceTime(400),
+      distinctUntilChanged(),
+      tap(() => this.clickSearch = true),
+      switchMap(name => this.autoComplete.autoComplete(name)),
+      tap(() => this.clickSearch = false)
+    );
 
     this.apiService.$data.subscribe(data => {
       this.data = data;

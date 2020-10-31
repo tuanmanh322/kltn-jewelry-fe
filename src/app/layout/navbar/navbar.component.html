@@ -41,7 +41,7 @@
               </a>
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="#" style="color: black!important;">Trang cá nhân</a>
-                <a class="dropdown-item" href="#" style="color: black!important;" *appHasAnyAuthority="['ROLE_ADMIN']">Quản trị</a>
+                <a class="dropdown-item" routerLink="/admin" style="color: black!important;" *ngIf="isAdmin">Quản trị</a>
                 <a class="dropdown-item" href="#" style="color: black!important;" (click)="logOut()">Đăng xuất</a>
               </div>
             </div>

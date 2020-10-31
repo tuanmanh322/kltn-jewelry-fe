@@ -168,6 +168,16 @@
 a{
   text-decoration: none;
 }
+.title-list{
+  text-overflow: clip;
+  white-space: normal;
+  word-break: break-all;
+  color: black!important;
+}
+.title-list:hover{
+  color: coral!important;
+}
+
 .title-news{
   white-space: nowrap;
   overflow: hidden;

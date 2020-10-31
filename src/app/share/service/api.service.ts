@@ -57,7 +57,7 @@ export class ApiService {
   }
 
   delete(path: string, body: Object = {}): Observable<any> {
-    return this.delete(`${environment.api_url}${path}`, body)
+    return this.http.delete(`${environment.api_url}${path}`, body)
       .pipe(retry(2),
         catchError(err => {
           return throwError(err);

@@ -60,7 +60,13 @@ export class CartOrderComponent implements OnInit {
       return;
     }
     if (this.orderForm.valid) {
-      this.apiService.post('/order/add-cart', this.orderForm.value).subscribe(data => {
+      const orderm = {
+        hoten: this.orderForm.get('hoten').value,
+        address: this.orderForm.get('address').value,
+        phone: this.orderForm.get('phone').value,
+        totalMoney: this.priceTotal
+      };
+      this.apiService.post('/order/add-cart', orderm).subscribe(data => {
         this.productList.forEach(p => {
           const cart = {
             quantity: p.quantity,
@@ -73,13 +79,12 @@ export class CartOrderComponent implements OnInit {
           this.toastr.success('Đặt hàng thành công');
           localStorage.removeItem(PRODUCT);
         });
-
         this.router.navigate(['/load-success']);
       });
     }
   }
 
-  get f(){
+  get f() {
     return this.orderForm.controls;
   }
 }

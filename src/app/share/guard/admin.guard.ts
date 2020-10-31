@@ -24,6 +24,10 @@ export class AdminGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     this.userModel = this.storageService.getProfileJson();
-    return !(!this.auth.isAuthenticated() && this.userModel.userRole !== 1);
+    if (this.userModel.userRole !== 1){
+      this.router.navigate(['']);
+      return false;
+    }
+    return true;
   }
 }

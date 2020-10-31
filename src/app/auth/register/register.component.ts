@@ -50,6 +50,7 @@ export class RegisterComponent implements OnInit {
       };
       this.apiService.post('/user/register', userAdd).subscribe(() => {
         this.toastr.success('Đăng ký thành công!');
+        this.router.navigate(['/login']);
         this.userForm.reset();
       });
     }

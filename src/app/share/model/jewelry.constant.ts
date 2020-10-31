@@ -25,3 +25,4 @@ export const AUTHORITIES_KEY = 'Authorities';
 export const TITLE = 'TITLE';
 export const SESSIONID = 'SESSIONID';
 export const PRODUCT = 'PRODUCT';
+export const POT = 'POT';

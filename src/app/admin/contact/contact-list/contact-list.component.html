@@ -1,1 +1,47 @@
-<p>contact-list works!</p>
+<div class="row">
+  <div class="col-8">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-8">
+              <input type="text" class="form-control" name="name" [(ngModel)]="name">
+            </div>
+            <div class="col-4">
+              <input type="button" class="btn btn-success" value="Tìm kiếm" (click)="search()">
+            </div>
+          </div>
+        </div>
+  </div>
+  <div class="col-4">
+<!--    <button class="btn btn-primary float-right" (click)="create()">Thêm mới</button>-->
+  </div>
+</div>
+<p class="float-right"> Tổng số sản phầm : <span style="color: coral">{{totalItem}}</span></p>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">TT</th>
+    <th scope="col">Tên </th>
+    <th scope="col">Email </th>
+    <th scope="col">Số điện thoại </th>
+    <th scope="col">Nội dung </th>
+    <th scope="col">Hành động</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let ca of cateList; let i = index">
+    <td scope="row">{{i+1}}</td>
+    <td>{{ca.name}}</td>
+    <td>{{ca.email}}</td>
+    <td>{{ca.phone}}</td>
+    <td>{{ca.content}}</td>
+    <td>
+      <div class="form-group">
+        <button class="btn btn-danger" (click)="de(ca.id)">Xóa</button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<div style="margin: auto;width: 50%;padding: 10px;">
+  <app-paginator (searchFunction)="fetch()" [searchObject]="categorySearch"></app-paginator>
+</div>

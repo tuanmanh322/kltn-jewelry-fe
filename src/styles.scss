@@ -8,6 +8,9 @@
 @import "assets/css/form.css";
 @import "assets/css/memenu.css";
 
+.image img{
+  width: 975px!important;
+}
 
 //cart
 
@@ -167,6 +170,17 @@
 //paginator
 a{
   text-decoration: none;
+}
+.data-name-product{
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.data-name-product:hover{
+  text-overflow: clip;
+  white-space: normal;
+  word-break: break-all;
 }
 .title-list{
   text-overflow: clip;

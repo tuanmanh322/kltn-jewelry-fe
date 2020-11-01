@@ -1,1 +1,50 @@
-<p>news-list works!</p>
+<div class="row">
+  <div class="col-8">
+    <div class="form-group">
+      <div class="row">
+        <div class="col-8">
+          <input type="text" class="form-control" name="name" placeholder="Nhập tiêu đề" [(ngModel)]="titleS">
+        </div>
+        <div class="col-4">
+          <input type="button" class="btn btn-success" value="Tìm kiếm" (click)="search()">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+        <button class="btn btn-primary float-right" (click)="create()">Thêm mới</button>
+  </div>
+</div>
+<p class="float-right"> Tổng số sản phầm : <span style="color: coral">{{totalItem}}</span></p>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">TT</th>
+    <th scope="col">Tiêu đề </th>
+    <th scope="col">Trích dẫn </th>
+    <th scope="col">Ảnh </th>
+    <th scope="col">Ngày tạo </th>
+    <th scope="col">Nội dung </th>
+    <th scope="col">Hành động</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let ca of cateList; let i = index">
+    <td scope="row">{{i+1}}</td>
+    <td class="data-name-product">{{ca.title}}</td>
+    <td class="data-name-product">{{ca.thumbnails}}</td>
+    <td><img style="width: 30px; height: 30px" src="{{ca.image}}"></td>
+    <td>{{ca.createdDate | date: 'dd/MM/yyyy'}}</td>
+    <td class="data-name-product">{{ca.content}}</td>
+    <td>
+      <div class="form-group">
+        <button class="btn btn-success" (click)="edit(ca)">Sửa</button>
+        <button class="btn btn-danger" (click)="de(ca.id)">Xóa</button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<div style="margin: auto;width: 50%;padding: 10px;">
+  <app-paginator (searchFunction)="fetch()" [searchObject]="categorySearch"></app-paginator>
+</div>

@@ -1,1 +1,27 @@
-<p>color-create works!</p>
+<div class="modal-header" style="background: darkturquoise;">
+  <h4 class="modal-title">Thêm mới loại</h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="container">
+    <div class="row">
+      <form [formGroup]="cateForm" (ngSubmit)="onCreate()" style="width: 98%;">
+        <div class="form-group">
+          <label>Tên :</label>
+          <input type="text" class="form-control" placeholder="Nhập vào tên..." name="name" formControlName="name">
+          <div class="text-danger" *ngIf="f.name.errors && (f.name.touched || f.name.dirty)">
+            <div *ngIf="f.name.errors.required">Tên không được bỏ trống!</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Tạo mới" class="btn btn-success">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="close()">Đóng</button>
+</div>

@@ -1,1 +1,44 @@
-<p>trade-list works!</p>
+<div class="row">
+  <div class="col-8">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-8">
+              <input type="text" class="form-control" placeholder="nhập vào tên" [(ngModel)]="name" name="name">
+            </div>
+            <div class="col-4">
+              <input type="button" class="btn btn-success" value="Tìm kiếm" (click)="onSearch()">
+            </div>
+          </div>
+        </div>
+  </div>
+  <div class="col-4">
+    <button class="btn btn-primary float-right" (click)="create()">Thêm mới</button>
+  </div>
+</div>
+<p class="float-right"> Tổng số sản phầm : <span style="color: coral">{{totalItem}}</span></p>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">TT</th>
+    <th scope="col">Tên công ty</th>
+    <th scope="col">Mô tả</th>
+    <th scope="col">Hành động</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let ca of cateList; let i = index">
+    <td scope="row">{{i+1}}</td>
+    <td>{{ca.nameProduct}}</td>
+    <td>{{ca.description}}</td>
+    <td>
+      <div class="form-group">
+        <button class="btn btn-success" (click)="edit(ca)">Sửa</button>
+        <button class="btn btn-danger" (click)="de(ca.id)">Xóa</button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<div style="margin: auto;width: 50%;padding: 10px;">
+  <app-paginator (searchFunction)="fetch()" [searchObject]="categorySearch"></app-paginator>
+</div>

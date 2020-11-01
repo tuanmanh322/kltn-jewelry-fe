@@ -1,1 +1,43 @@
-<p>sale-edit works!</p>
+<div class="modal-header" style="background: darkturquoise;">
+  <h4 class="modal-title">Thêm mới giảm giá</h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="container">
+    <div class="row">
+      <form [formGroup]="cateForm" (ngSubmit)="onEdit()" style="width: 98%;">
+        <div class="form-group">
+          <label>Tên :</label>
+          <input type="text" class="form-control" placeholder="Nhập vào tên..." name="name" formControlName="name">
+          <div class="text-danger" *ngIf="f.name.errors && (f.name.touched || f.name.dirty)">
+            <div *ngIf="f.name.errors.required">Tên không được bỏ trống!</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Mã giảm :</label>
+          <input type="text" class="form-control" placeholder="Nhập vào mã giảm..." name="code" formControlName="code">
+          <small class="small">Ví dụ: 0.10, 0.22, 0.33, 0.00, ...</small>
+          <div class="text-danger" *ngIf="f.code.errors && (f.code.touched || f.code.dirty)">
+            <div *ngIf="f.code.errors.required">Mã giảm không được bỏ trống!</div>
+            <div *ngIf="f.code.errors.pattern">Mã giảm không hợp lệ!</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Mô tả :</label>
+          <input type="text" class="form-control" placeholder="Nhập vào mô tả..." name="description" formControlName="description">
+          <div class="text-danger" *ngIf="f.description.errors && (f.description.touched || f.description.dirty)">
+            <div *ngIf="f.description.errors.required">Tên không được bỏ trống!</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Sửa" class="btn btn-success">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="close()">Đóng</button>
+</div>

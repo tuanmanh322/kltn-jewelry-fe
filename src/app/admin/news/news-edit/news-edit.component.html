@@ -1,1 +1,61 @@
-<p>news-edit works!</p>
+<div class="modal-header" style="background: darkturquoise;">
+  <h4 class="modal-title">Sửa tin tức</h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="container">
+    <div class="row">
+      <form [formGroup]="newsForm"   style="width: 98%;">
+        <div class="form-group">
+          <label>Tiêu đề :</label>
+          <input type="text" class="form-control" placeholder="Nhập vào tiêu đề..." name="title" formControlName="title">
+          <div class="text-danger" *ngIf="f.title.errors && (f.title.touched || f.title.dirty)">
+            <div *ngIf="f.title.errors.required">Tiêu đề không được bỏ trống!</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Trích dẫn :</label>
+          <textarea class="form-control" placeholder="Nhập vào mô tả..." name="thumbnails" formControlName="thumbnails"></textarea>
+          <div class="text-danger" *ngIf="f.thumbnails.errors && (f.thumbnails.touched || f.thumbnails.dirty)">
+            <div *ngIf="f.thumbnails.errors.required">Trích dẫn không được bỏ trống!</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Ảnh dẫn :</label>
+          <!--        Image Preview -->
+          <div *ngIf="ca && ca.image && !preview">
+            <!--                <p>{{profileEmp.image}}</p>-->
+            <img [src]="ca.image" class="avatar-preview"
+                 alt="t">
+          </div>
+<!--          <div class="form-group" *ngIf="!ca.image && !preview">-->
+<!--            <img src="../../../../assets/img/default.png" class="avatar-preview">-->
+<!--          </div>-->
+          <!--        Image Preview -->
+          <div class="form-group">
+            <div class="preview" *ngIf="preview && preview !== null">
+              <img class="avatar-preview" [src]="preview" >
+            </div>
+          </div>
+          <!-- File Input -->
+          <div class="form-group">
+            <input style="margin-left: 70px" type="file" (change)="getFile($event)" id="image">
+          </div>
+        </div>
+      </form>
+      <div class="form-group">
+        <label>Nội dung :</label>
+        <ckeditor [editor]="Editor"  placeholder="<p>Viết nội dung!</p>" [(ngModel)]="contentNews" (ready)="onReady($event)"></ckeditor>
+        <div class="text-danger" *ngIf="contentNews === null">Nội dung không được bỏ trống!</div>
+      </div>
+      <div class="form-group col-12">
+        <input type="submit" value="Sửa" class="btn btn-success" (click)="onEdit()">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="close()">Đóng</button>
+</div>

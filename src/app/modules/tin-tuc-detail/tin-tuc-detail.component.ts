@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ApiService} from '../../share/service/api.service';
 import {NewsModel} from '../../share/model/news.model';
@@ -6,7 +6,8 @@ import {NewsModel} from '../../share/model/news.model';
 @Component({
   selector: 'app-tin-tuc-detail',
   templateUrl: './tin-tuc-detail.component.html',
-  styleUrls: ['./tin-tuc-detail.component.css']
+  styleUrls: ['./tin-tuc-detail.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TinTucDetailComponent implements OnInit {
   newDetail: NewsModel;

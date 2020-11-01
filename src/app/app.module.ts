@@ -66,6 +66,7 @@ import {ColorListComponent} from './admin/color/color-list/color-list.component'
 import {ListCategoryComponent} from './admin/category/list-category/list-category.component';
 import {AdminComponent} from './admin/admin/admin.component';
 import {ProductListAdminComponent} from './admin/product/product-list-admin/product-list-admin.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -136,7 +137,8 @@ import {ProductListAdminComponent} from './admin/product/product-list-admin/prod
     AppRoutes,
     CarouselModule,
     Ng5SliderModule,
-    CKEditorModule
+    CKEditorModule,
+    NgbModule
   ],
   providers: [
     ApiService,

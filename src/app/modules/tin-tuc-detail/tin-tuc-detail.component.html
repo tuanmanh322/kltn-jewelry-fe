@@ -1,11 +1,17 @@
 <app-navbar></app-navbar>
 <div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Trang chủ</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Tin tức</li>
+      <li class="breadcrumb-item active" aria-current="page">{{newDetail.title}}</li>
+    </ol>
+  </nav>
   <div class="row">
     <div class="col-10">
       <h3>{{newDetail.title}}</h3>
       <p>{{newDetail.createdDate | date:'dd/MM/yyyy'}}</p>
-      <div [innerHTML]="newDetail.content">
-
+      <div [innerHTML]="newDetail.content" class="row d-inline" style="display: block">
       </div>
     </div>
   </div>

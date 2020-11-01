@@ -3,16 +3,16 @@
     <div class="form-group">
       <div class="row">
         <div class="col-8">
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" placeholder="nhập vào tên" [(ngModel)]="nameS">
         </div>
         <div class="col-4">
-          <input type="button" class="btn btn-success" value="Tìm kiếm">
+          <input type="button" class="btn btn-success" value="Tìm kiếm" (click)="onSearch()">
         </div>
       </div>
     </div>
   </div>
   <div class="col-4">
-    <button class="btn btn-primary float-right">Thêm mới</button>
+    <button class="btn btn-primary float-right" (click)="create()">Thêm mới</button>
   </div>
 </div>
 <p class="float-right"> Tổng số sản phầm : <span style="color: coral">{{totalItem}}</span></p>
@@ -32,7 +32,7 @@
     <td>{{ca.description}}</td>
     <td>
       <div class="form-group">
-        <button class="btn btn-success" >Sửa</button>
+        <button class="btn btn-success" (click)="edit(ca)">Sửa</button>
         <button class="btn btn-danger" (click)="de(ca.id)">Xóa</button>
       </div>
     </td>

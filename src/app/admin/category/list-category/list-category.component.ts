@@ -5,6 +5,9 @@ import {ApiService} from '../../../share/service/api.service';
 import {CategoryModel} from '../../../share/model/category.model';
 import {Subscription} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {CategoryCreateComponent} from '../category-create/category-create.component';
+import {CategoryEditComponent} from '../category-edit/category-edit.component';
 
 @Component({
   selector: 'app-list-category',
@@ -20,12 +23,17 @@ export class ListCategoryComponent implements OnInit, OnDestroy {
   cateList: CategoryModel[];
   totalItem = 0;
   subcription: Subscription;
+  nameS = '';
 
   constructor(
     private title: Title,
     private apiService: ApiService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private modalService: NgbModal
   ) {
+    this.apiService.onLoad().subscribe(() => {
+      this.fetch();
+    });
   }
 
   ngOnInit(): void {
@@ -33,7 +41,13 @@ export class ListCategoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.subcription.unsubscribe();
+  }
 
+  onSearch() {
+    this.categorySearch.page = 0;
+    this.categorySearch.name = this.nameS;
+    this.fetch();
   }
 
   fetch(): void {
@@ -49,5 +63,13 @@ export class ListCategoryComponent implements OnInit, OnDestroy {
       this.toastr.success('Xoá thành công');
       this.fetch();
     });
+  }
+
+  create() {
+    this.modalService.open(CategoryCreateComponent, {size: 'md'});
+  }
+
+  edit(ca) {
+    this.modalService.open(CategoryEditComponent, {size: 'md'}).componentInstance.ca = ca;
   }
 }

@@ -1,1 +1,116 @@
-<p>profile-user works!</p>
+<app-navbar>
+</app-navbar>
+<div class="container ">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Trang chủ</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Trang cá nhân</li>
+      <li class="breadcrumb-item active" aria-current="page">{{userProfile.username}}</li>
+    </ol>
+  </nav>
+  <div class="row">
+    <div class="col-6">
+      <h3> Thông tin cá nhân</h3>
+      <form  [formGroup]="userPForm" (ngSubmit)="onSave()">
+        <div class="form-group">
+          <label class="column-labels">Họ :</label>
+          <input type="text" class="form-control" formControlName="firstname" name="firstname" placeholder="Nhập vào họ...">
+          <div  class="text-danger" *ngIf="f.firstname.errors && (f.firstname.touched || f.firstname.dirty)">
+              <div *ngIf="f.firstname.errors.required">Họ không được bỏ trống!</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="column-labels">Tên :</label>
+          <input type="text" class="form-control" formControlName="lastname" name="lastname" placeholder="Nhập vào tên...">
+          <div  class="text-danger" *ngIf="f.lastname.errors && (f.lastname.touched || f.lastname.dirty)">
+            <div *ngIf="f.lastname.errors.required">Tên không được bỏ trống!</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="column-labels">Username :</label>
+          <input type="text" class="form-control" formControlName="username" name="username" disabled >
+        </div>
+        <div class="form-group">
+          <label class="column-labels">Số điện thoại :</label>
+          <input type="text" class="form-control" formControlName="phone" name="phone" placeholder="Nhập vào số điện thoại...">
+          <div  class="text-danger" *ngIf="f.phone.errors && (f.phone.touched || f.phone.dirty)">
+            <div *ngIf="f.phone.errors.required">Số điện thoại không được bỏ trống!</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="column-labels">Địa chỉ :</label>
+          <textarea class="form-control"  formControlName="address" name="address" placeholder="Nhập vào địa chỉ..." rows="5"></textarea>
+          <div  class="text-danger" *ngIf="f.address.errors && (f.address.touched || f.address.dirty)">
+            <div *ngIf="f.address.errors.required">Địa chỉ không được bỏ trống!</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="column-labels">Quyền :</label>
+          <input type="text" class="form-control" value="Khách" *ngIf="userProfile.userRole === 2"  disabled >
+          <input type="text" class="form-control" value="Quản trị" *ngIf="userProfile.userRole === 1"  disabled >
+        </div>
+        <div class="form-group">
+          <input type="submit"   value="Lưu lại" class="btn btn-success">
+        </div>
+      </form>
+    </div>
+    <div class="col-6">
+      <h3> Thay đổi mật khẩu</h3>
+      <form [formGroup]="passwordForm" (ngSubmit)="onChangePassword()">
+        <div class="form-group">
+          <label class="column-labels">Mật khẩu cũ :</label>
+          <input type="password" class="form-control" formControlName="oldPassword" name="oldPassword" placeholder="Nhập vào passowrd...">
+          <div  class="text-danger" *ngIf="fr.oldPassword.errors && (fr.oldPassword.touched || fr.oldPassword.dirty)">
+            <div *ngIf="fr.oldPassword.errors.required">Mật khẩu không được bỏ trống!</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="column-labels">Mật khẩu mới :</label>
+          <input type="password" class="form-control" formControlName="newPassword" name="newPassword" placeholder="Nhập vào passowrd..." >
+          <div  class="text-danger" *ngIf="fr.newPassword.errors && (fr.newPassword.touched || fr.newPassword.dirty)">
+            <div *ngIf="fr.newPassword.errors.required">Mật khẩu mới không được bỏ trống!</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="column-labels">Nhập lại mật khẩu :</label>
+          <input type="password" class="form-control"   placeholder="Nhập lại passowrd..." (change)="checkPassMatch($event)">
+          <div class="text-danger" *ngIf="isNotMatch">
+              Mật khẩu không khớp
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="submit"   value="Lưu" class="btn btn-success">
+        </div>
+      </form>
+    </div>
+  </div>
+  <hr>
+  <h3 align="center">Sản phẩm đã đặt</h3>
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">TT</th>
+          <th scope="col">Tên sản phẩm </th>
+          <th scope="col">Giá </th>
+          <th scope="col">Số lương </th>
+          <th scope="col">Hình Ảnh</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let ca of cartDetail; let i = index">
+          <td scope="row">{{i+1}}</td>
+          <td class="data-name">{{ca.name}}</td>
+          <td>{{ca.price | vndTransfer}}</td>
+          <td>{{ca.quantity}}</td>
+          <td><img  style="width: 30px; height: 30px" src="{{ca.image}}"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<app-footer></app-footer>

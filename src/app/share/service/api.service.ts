@@ -19,6 +19,9 @@ export class ApiService {
   public $cate = new Subject<any>();
   cate = this.$cate.asObservable();
 
+  public $action = new Subject<any>();
+  action = this.$action.asObservable();
+
   private _listen = new Subject<any>();
 
   constructor(
@@ -88,5 +91,9 @@ export class ApiService {
 
   sendCate(id) {
     this.$cate.next(id);
+  }
+
+  sendAction(action){
+    this.$action.next(action);
   }
 }

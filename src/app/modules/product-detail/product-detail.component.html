@@ -41,7 +41,7 @@
             <div class="prdt-cost">
               <ul>
                 <li *ngIf="productDetail.codeSale">Giá gốc:
-                  <del>{{productDetail.price}}</del>
+                  <del>{{productDetail.price| vndTransfer}}</del>
                 </li>
                 <li>Giá đang bán:</li>
                 <li class="active">{{ (productDetail.price - (productDetail.price * productDetail.codeSale))| vndTransfer}}</li>
@@ -71,7 +71,7 @@
           </div>
           <div class="single-bottom1">
             <h6>Chi tiết</h6>
-            <p class="prod-desc">{{productDetail.description}}</p>
+            <div class="prod-desc" [innerHTML]="productDetail.description"></div>
           </div>
         </div>
         <div class="clearfix"></div>

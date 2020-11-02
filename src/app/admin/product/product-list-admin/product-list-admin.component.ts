@@ -80,8 +80,8 @@ export class ProductListAdminComponent implements OnInit, OnDestroy {
     this.modalService.open(ProductCreateComponent, {size: 'lg'});
   }
 
-  edit(ca) {
-    this.modalService.open(ProductEditComponent, {size: 'lg'}).componentInstance.ca = ca;
+  edit(pro) {
+    this.modalService.open(ProductEditComponent, {size: 'lg'}).componentInstance.pro = pro;
   }
 
 }

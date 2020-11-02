@@ -40,7 +40,7 @@
                 {{userProfile.username}}
               </a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#" style="color: black!important;">Trang cá nhân</a>
+                <a class="dropdown-item" routerLink="/profile-user" style="color: black!important;">Trang cá nhân</a>
                 <a class="dropdown-item" routerLink="/admin" style="color: black!important;" *ngIf="isAdmin">Quản trị</a>
                 <a class="dropdown-item" href="#" style="color: black!important;" (click)="logOut()">Đăng xuất</a>
               </div>

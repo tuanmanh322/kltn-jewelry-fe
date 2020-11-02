@@ -61,7 +61,6 @@ export class ProductDetailComponent implements OnInit {
         this.fetchDataRelative(this.productDetail);
       });
     });
-
   }
 
   fetchDataRelative(productDetail: ProductDetailModel) {

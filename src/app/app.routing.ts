@@ -24,6 +24,7 @@ import {OrderListComponent} from './admin/orders/order-list/order-list.component
 import {NewsListComponent} from './admin/news/news-list/news-list.component';
 import {AdminComponent} from './admin/admin/admin.component';
 import {ProductListAdminComponent} from './admin/product/product-list-admin/product-list-admin.component';
+import {AuthGuard} from './share/guard/auth.guard';
 
 
 const routes: Routes = [
@@ -123,7 +124,8 @@ const routes: Routes = [
   },
   {
     path: 'profile-user',
-    component: ProfileUserComponent
+    component: ProfileUserComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'load-success',

@@ -14,9 +14,9 @@ export class FooterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.apiService.get('/category/all').subscribe(res => {
-      this.categoryList = res;
-    });
+    // this.apiService.get('/category/all').subscribe(res => {
+    //   this.categoryList = res;
+    // });
   }
   sendCate(id){
     this.apiService.sendCate(id);

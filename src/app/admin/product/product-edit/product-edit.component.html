@@ -1,1 +1,101 @@
-<p>product-edit works!</p>
+<div class="modal-header" style="background: darkturquoise;">
+  <h4 class="modal-title">Sửa sản phẩm</h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="container">
+    <div class="row">
+      <form [formGroup]="productEdit"   style="width: 98%;">
+        <div class="form-group">
+          <label>Tên sản phẩm :</label>
+          <input type="text" class="form-control" placeholder="Nhập vào tên..."  name="namesp" formControlName="namesp" />
+          <div class="text-danger" *ngIf="f.namesp.errors && (f.namesp.touched || f.namesp.dirty )">
+            <div *ngIf="f.namesp.errors.required">Tên không được bỏ trống!</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Mã sản phẩm :</label>
+          <input type="text" class="form-control" placeholder="Nhập vào mã..." name="masp" formControlName="masp" />
+          <div class="text-danger" *ngIf="f.masp.errors && (f.masp.touched || f.masp.dirty )">
+            <div *ngIf="f.masp.errors.required">Mã không được bỏ trống!</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Giá sản phẩm :</label>
+          <input type="text" class="form-control" placeholder="Nhập vào giá..." name="price" formControlName="price" />
+          <div class="text-danger" *ngIf="f.price.errors && (f.price.touched || f.price.dirty)">
+            <div *ngIf="f.price.errors.required">Giá không được bỏ trống!</div>
+            <div *ngIf="f.price.errors.pattern">Giá không hợp lệ!</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Số lượng sản phẩm :</label>
+          <input type="text" class="form-control" placeholder="Nhập vào số lượng..." name="totaltitem" formControlName="totaltitem" />
+          <div class="text-danger" *ngIf="f.totaltitem.errors && (f.totaltitem.touched || f.totaltitem.dirty)">
+            <div *ngIf="f.totaltitem.errors.required">số lượng không được bỏ trống!</div>
+            <div *ngIf="f.totaltitem.errors.pattern">số lượng không hợp lệ!</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Loại sp :</label>
+          <select  class="form-control" formControlName="idcate" name="idcate">
+            <option selected value=""></option>
+            <option *ngFor="let ca of cateList" [value]="ca.id">{{ca.name}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Chất liệu :</label>
+          <select  class="form-control" formControlName="idco" name="idco">
+            <option selected value=""></option>
+            <option *ngFor="let ca of colorList" [value]="ca.id">{{ca.name}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Giảm giá :</label>
+          <select  class="form-control" formControlName="idsale" name="idsale">
+            <option selected value=""></option>
+            <option *ngFor="let ca of saleList" [value]="ca.id">{{ca.name}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Thương hiệu :</label>
+          <select  class="form-control" formControlName="idmark" name="idmark">
+            <option selected value=""></option>
+            <option *ngFor="let ca of trademark" [value]="ca.id">{{ca.nameProduct}}</option>
+          </select>
+        </div>
+      </form>
+      <div class="form-group">
+        <label>Ảnh dẫn :</label>
+        <div class="form-group">
+          <div class="preview" *ngIf="pro && pro.imageProduct !== null">
+            <img class="avatar-preview" [src]="pro.imageProduct" style="height: 110px;width: 200px;">
+          </div>
+        </div>
+        <!--        Image Preview -->
+        <div class="form-group">
+          <div class="preview" *ngIf="preview && preview !== null">
+            <img class="avatar-preview" [src]="preview" style="height: 110px;width: 200px;">
+          </div>
+        </div>
+        <!-- File Input -->
+        <div class="form-group">
+          <input style="margin-left: 70px" type="file" (change)="getFile($event)" id="image">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Nội dung :</label>
+        <ckeditor [editor]="Editor"  placeholder="<p>Viết nội dung!</p>" [(ngModel)]="contentNews" (ready)="onReady($event)"></ckeditor>
+        <div class="text-danger" *ngIf="contentNews === null">Nội dung không được bỏ trống!</div>
+      </div>
+      <div class="form-group col-12">
+        <button type="submit" value="Sửa" class="btn btn-success" (click)="onCreate()">Sửa</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="close()">Đóng</button>
+</div>

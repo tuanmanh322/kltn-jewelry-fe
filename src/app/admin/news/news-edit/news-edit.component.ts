@@ -41,8 +41,8 @@ export class NewsEditComponent implements OnInit {
   ngOnInit(): void {
     this.newsForm = this.fb.group({
       image: new FormControl(''),
-      thumbnails: new FormControl('this.ca.thumbnails', [Validators.required]),
-      title: new FormControl('this.ca.title', [Validators.required]),
+      thumbnails: new FormControl(this.ca.thumbnails, [Validators.required]),
+      title: new FormControl(this.ca.title, [Validators.required]),
     });
     this.contentNews = this.ca.content;
   }
@@ -70,7 +70,7 @@ export class NewsEditComponent implements OnInit {
       }
       d.append('content', this.contentNews);
       this.apiService.post('/news/edit', d).subscribe(() => {
-        this.toastr.success('Thêm mới thành công!');
+        this.toastr.success('Sửa thành công!');
         this.apiService.onFilter('Edit');
         this.activeModal.dismiss();
       });

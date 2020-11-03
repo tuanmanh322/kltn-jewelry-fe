@@ -73,6 +73,7 @@ export class ProfileUserComponent implements OnInit {
     if (this.passwordForm.valid) {
       this.apiService.put('/user/change-password', this.passwordForm.value).subscribe(() => {
         this.toastr.success('Đổi thành công');
+        this.passwordForm.reset();
       });
     }
   }

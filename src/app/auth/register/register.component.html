@@ -6,9 +6,10 @@
       <li class="breadcrumb-item active" aria-current="page">Đăng ký tài khoản</li>
     </ol>
   </nav>
-  <div class="registration">
-    <div class="registration_left">
+  <div class="row">
+    <div class="col-8">
       <h2>Người dùng mới? <span> tạo một tài khoản </span></h2>
+      <br>
       <!-- [if IE]
        < link rel='stylesheet' type='text/css' href='ie.css'/>
       [endif] -->
@@ -16,46 +17,45 @@
       <!-- [if lt IE 7]>
        < link rel='stylesheet' type='text/css' href='ie6.css'/>
       <! [endif] -->
-      <div class="registration_form">
         <!-- Form -->
-        <form  [formGroup]="userForm" (ngSubmit)="onSubmit()">
-          <div>
+        <form  [formGroup]="userForm" (ngSubmit)="onSubmit()" style="width: 90%">
+          <div class="form-group">
             <label>
-              <input placeholder="Họ " type="text"  name="firstName" formControlName="firstName">
+              <input placeholder="Họ " type="text"  name="firstName" class="form-control" formControlName="firstName">
             </label>
             <div class="text-danger" *ngIf="f.firstName.errors && (f.firstName.touched || f.firstName.dirty)">
               <div *ngIf="f.firstName.errors.required">Họ không hợp lệ</div>
             </div>
           </div>
-          <div>
+          <div class="form-group">
             <label>
-              <input placeholder="Tên :" type="text" name="lastName" formControlName="lastName">
+              <input placeholder="Tên :"  class="form-control" type="text" name="lastName" formControlName="lastName">
             </label>
             <div class="text-danger" *ngIf="f.lastName.errors && (f.lastName.touched || f.lastName.dirty)">
               <div *ngIf="f.lastName.errors.required">Tên không hợp lệ</div>
             </div>
           </div>
-          <div>
+          <div class="form-group">
             <label>
-              <input placeholder="Tên tài khoản:" type="text"  name="username" formControlName="username" oninput="this.value = this.value.toLowerCase()" />
+              <input placeholder="Tên tài khoản:" class="form-control" type="text"  name="username" formControlName="username" oninput="this.value = this.value.toLowerCase()" />
             </label>
             <div class="text-danger" *ngIf="f.username.errors && (f.username.touched || f.username.dirty)">
               <div *ngIf="f.username.errors.required">Tên tài khoản nhập vào không hợp lệ</div>
               <div *ngIf="f.username.errors.minlength">Tên tài khoản nhập vào phải có tối thiểu 6 ký tự</div>
             </div>
           </div>
-          <div>
+          <div class="form-group">
             <label>
-              <input placeholder="Mật khẩu" type="password"  name="password" formControlName="password" >
+              <input placeholder="Mật khẩu" class="form-control" type="password"  name="password" formControlName="password" >
             </label>
             <div class="text-danger" *ngIf="f.password.errors && (f.password.touched || f.password.dirty)">
               <div *ngIf="f.password.errors.required">Mật khẩu nhập vào không hợp  lệ</div>
               <div *ngIf="f.password.errors.minlength">Mật khẩu nhập vào phải có tối thiểu 8 ký tự</div>
             </div>
           </div>
-          <div>
+          <div class="form-group">
             <label>
-              <input placeholder="Nhập lại mật khẩu" type="password" name="passwordRe" (change)="checkMatchPw($event)" formControlName="passwordRe">
+              <input placeholder="Nhập lại mật khẩu" class="form-control" type="password" name="passwordRe" (change)="checkMatchPw($event)" formControlName="passwordRe">
             </label>
             <div class="text-danger" *ngIf="f.passwordRe.errors && (f.passwordRe.touched || f.passwordRe.dirty)">
               <div *ngIf="f.passwordRe.errors.required">Nhập lại mật khẩu là cần thiết</div>
@@ -64,28 +64,36 @@
               Mật khẩu không khớp!
             </div>
           </div>
-          <div>
+          <div class="form-group">
             <label>
-              <input placeholder="Số điện thoại:" type="text"  name="phone" formControlName="phone" maxlength="10">
+              <input placeholder="Số điện thoại:" class="form-control" type="text"  name="phone" formControlName="phone" maxlength="10">
             </label>
             <div class="text-danger" *ngIf="f.phone.errors && (f.phone.touched || f.phone.dirty)">
               <div *ngIf="f.phone.errors.required">Số điện thoại là cần thiết</div>
               <div *ngIf="f.phone.errors.minlength">Số điện thoại nhập vào phải có tối thiểu 10 ký tự</div>
+              <div *ngIf="f.phone.errors.pattern">Số điện thoại không hợp lệ</div>
             </div>
           </div>
-          <div class="sky_form1">
-            <ul>
-              <li><label class="radio left"><input type="radio" name="sex" checked="" formControlName="sex" value="1"><i></i>Nam</label></li>
-              <li><label class="radio"><input type="radio" name="sex" formControlName="sex" value="0"><i></i>Nữ</label></li>
+          <div class="form-group">
+            <label>
+              <textarea placeholder="Địa chỉ:" class="form-control" type="text"  name="address" formControlName="address" rows="5" ></textarea>
+            </label>
+            <div class="text-danger" *ngIf="f.address.errors && (f.address.touched || f.phone.dirty)">
+              <div *ngIf="f.address.errors.required">Địa chỉ là cần thiết</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <ul style="list-style: none; display: flex">
+              <li><label class="radio left"><input   type="radio" name="sex" checked="" formControlName="sex" value="1"><i></i>Nam</label></li>
+              <li style="padding-left: 37px;"><label class="radio"><input   type="radio" name="sex" formControlName="sex" value="0"><i></i>Nữ</label></li>
               <div class="clearfix"></div>
             </ul>
           </div>
-          <div>
-            <input type="submit" value="Tạo tài khoản" >
+          <div class="form-group">
+            <input type="submit" class="form-control" value="Tạo tài khoản" >
           </div>
         </form>
         <!-- /Form -->
-      </div>
     </div>
     <div class="registration_left">
 

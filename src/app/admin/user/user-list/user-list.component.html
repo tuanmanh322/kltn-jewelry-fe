@@ -36,7 +36,8 @@
     <td>{{ca.lastName}}</td>
     <td>{{ca.phone}}</td>
     <td>{{ca.address}}</td>
-    <td>{{ca.active ? 'Hoạt động' : 'Khóa'}}</td>
+    <td *ngIf="ca.active" (click)="lockUser(ca.id)" style="color: coral; cursor: pointer">{{ca.active ? 'Hoạt động' : 'Khóa'}}</td>
+    <td *ngIf="!ca.active" (click)="unLockUser(ca.id)" style="color: coral; cursor: pointer">{{ca.active ? 'Hoạt động' : 'Khóa'}}</td>
     <td>{{ca.userRole === 1 ? 'Quản trị' : 'Khách'}}</td>
     <td>
       <div class="form-group">

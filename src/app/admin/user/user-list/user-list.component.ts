@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ColorSearch} from '../../../share/model/color-search';
 import {ColorModel} from '../../../share/model/color.model';
 import {Subscription} from 'rxjs';
@@ -67,6 +67,20 @@ export class UserListComponent implements OnInit {
 
   edit(user) {
     this.modalService.open(UserEditComponent, {size: 'md'}).componentInstance.user = user;
+  }
+
+  lockUser(id) {
+    this.apiService.get('/user/lock-user/' + id).subscribe(() => {
+      this.fetch();
+      this.toastr.success('Khóa thành công!');
+    });
+  }
+
+  unLockUser(id) {
+    this.apiService.get('/user/un-lock-user/' + id).subscribe(() => {
+      this.toastr.success('Mở thành công!');
+      this.fetch();
+    });
   }
 
 }

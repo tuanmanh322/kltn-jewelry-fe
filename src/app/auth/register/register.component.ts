@@ -30,7 +30,8 @@ export class RegisterComponent implements OnInit {
       password: new FormControl('', [Validators.required, Validators.minLength(8)]),
       passwordRe: new FormControl('', [Validators.required]),
       sex: new FormControl('', [Validators.required]),
-      phone: new FormControl('', [Validators.required])
+      phone: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(10)]),
+      address: new FormControl('', [Validators.required])
     });
   }
 
@@ -47,6 +48,7 @@ export class RegisterComponent implements OnInit {
         password: this.userForm.get('password').value,
         phone: this.userForm.get('phone').value,
         sex: this.userForm.get('sex').value,
+        address: this.userForm.get('address').value,
       };
       this.apiService.post('/user/register', userAdd).subscribe(() => {
         this.toastr.success('Đăng ký thành công!');

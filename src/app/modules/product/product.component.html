@@ -8,9 +8,23 @@
       </ol>
     </nav>
     <div class="row">
-      <h2 class="col-8">Danh mục</h2>
-      <div class="col-4">
+      <h2 class="col-6">Danh mục</h2>
+      <div class="col-3">
         <span class="float-right">Tổng số sản phẩm: <span style="color: #00a0dc;">{{totalItem}}</span></span>
+      </div>
+      <div class="dropdown" class="col-3">
+<!--        <a class="dropdown-toggle" style="text-decoration: none; color: black!important;float: right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--          Lọc sản phẩm-->
+<!--        </a>-->
+<!--        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">-->
+<!--          <a class="dropdown-item" href="#" (click)="">Giá từ thấp lên cao</a>-->
+<!--          <a class="dropdown-item" href="#">Giá từ cao xuống thấp</a>-->
+<!--        </div>-->
+        <select class="form-control" (change)="getSort($event)">
+          <option [value]="0" >Tất cả</option>
+          <option [value]="1">Giá từ cao xuống thấp</option>
+          <option [value]="2">Giá từ thấp lên cao</option>
+        </select>
       </div>
     </div>
     <div class="row">

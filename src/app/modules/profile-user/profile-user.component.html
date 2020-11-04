@@ -85,8 +85,8 @@
     </div>
   </div>
   <hr>
-  <h3 align="center">Sản phẩm đã đặt</h3>
-  <div class="row">
+  <h3 align="center" *ngIf="!isAdmin">Sản phẩm đã đặt</h3>
+  <div class="row" *ngIf="!isAdmin">
     <div class="col-12">
       <table class="table table-striped">
         <thead>

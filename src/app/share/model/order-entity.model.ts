@@ -7,4 +7,6 @@ export interface OrderEntityModel {
 
   phone: string;
 
+  createDate:Date;
+
 }

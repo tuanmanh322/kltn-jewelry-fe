@@ -23,6 +23,7 @@
     <th scope="col">Tên </th>
     <th scope="col">Số điện thoại </th>
     <th scope="col">Địa chỉ </th>
+    <th scope="col">Ngày đặt </th>
     <th scope="col">Hành động</th>
   </tr>
   </thead>
@@ -32,6 +33,7 @@
     <td>{{ca.hoten}}</td>
     <td>{{ca.phone}}</td>
     <td>{{ca.address}}</td>
+    <td>{{ca.createDate | formatLocalDateTime}}</td>
     <td>
       <div class="form-group">
         <button class="btn btn-danger" (click)="de(ca.id)">Xóa</button>

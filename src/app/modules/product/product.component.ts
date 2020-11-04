@@ -69,6 +69,7 @@ export class ProductComponent implements OnInit {
   colorList: ColorModel[];
   totalItem = 0;
   cateId = 0;
+
   constructor(
     private title: Title,
     private router: Router,
@@ -180,5 +181,45 @@ export class ProductComponent implements OnInit {
       this.productSearch.idCategory.splice(this.productSearch.idCategory.indexOf(ca), 1);
     }
     this.fetchData();
+  }
+
+  sortDesc(sho) {
+    this.order.property = sho;
+    this.productSearch.orders.push(this.order);
+    this.fetchData();
+  }
+
+  sortAsc(sho) {
+    this.order.property = sho;
+    this.productSearch.orders.push(this.order);
+    this.fetchData();
+  }
+
+  removeSort() {
+    this.productSearch.orders = [];
+    this.fetchData();
+  }
+
+  getSort($event){
+    const pot = parseInt($event.target.value);
+    let order = '';
+    switch (pot) {
+      case 0:
+        this.productSearch.orders = [];
+        this.fetchData();
+        break;
+      case 1:
+        this.productSearch.orders = [];
+        this.order.property = 'newest';
+        this.productSearch.orders.push(this.order);
+        this.fetchData();
+        break;
+      case 2:
+        this.productSearch.orders = [];
+        this.order.property = 'oldest';
+        this.productSearch.orders.push(this.order);
+        this.fetchData();
+        break;
+    }
   }
 }

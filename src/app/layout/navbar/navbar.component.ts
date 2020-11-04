@@ -124,14 +124,14 @@ export class NavbarComponent implements OnInit {
     this.apiService.get('/category/all').subscribe(res => {
       this.categoryList = res;
     });
-    this.apiService.action.subscribe(data => {
-      this.userService.getAuthState().subscribe(() => {
-        this.getProfile();
-      });
-      this.userService.identity().then(userProfile => {
-        this.userProfile = userProfile;
-      });
-    });
+    // this.apiService.action.subscribe(data => {
+    //   this.userService.getAuthState().subscribe(() => {
+    //     this.getProfile();
+    //   });
+    //   this.userService.identity().then(userProfile => {
+    //     this.userProfile = userProfile;
+    //   });
+    // });
   }
 
 

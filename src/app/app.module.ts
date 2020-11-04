@@ -67,6 +67,7 @@ import {ListCategoryComponent} from './admin/category/list-category/list-categor
 import {AdminComponent} from './admin/admin/admin.component';
 import {ProductListAdminComponent} from './admin/product/product-list-admin/product-list-admin.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {FormatLocalDateTime} from './share/pipe/format-local-date-time';
 
 @NgModule({
   declarations: [
@@ -120,7 +121,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     ColorListComponent,
     ListCategoryComponent,
     AdminComponent,
-    ProductListAdminComponent
+    ProductListAdminComponent,
+    FormatLocalDateTime
   ],
   imports: [
     BrowserModule,

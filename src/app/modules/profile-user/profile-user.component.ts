@@ -18,7 +18,7 @@ export class ProfileUserComponent implements OnInit {
   isNotMatch = false;
   passwordForm: FormGroup;
   cartDetail: CartDetailModel[];
-
+  isAdmin: boolean;
   constructor(
     private title: Title,
     private apiService: ApiService,
@@ -44,7 +44,11 @@ export class ProfileUserComponent implements OnInit {
     this.apiService.get('/cart/cart-list/' + this.userProfile.id).subscribe(data => {
       this.cartDetail = data;
     });
+    if (this.userProfile.userRole === 1){
+      this.isAdmin = true;
+    }
   }
+
 
   get f() {
     return this.userPForm.controls;

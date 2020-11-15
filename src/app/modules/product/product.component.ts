@@ -23,10 +23,10 @@ declare var $: any;
 export class ProductComponent implements OnInit {
   @ViewChild('checkboxcate') checkbox: ElementRef;
 
-  control: FormControl = new FormControl([0, 20000000]);
+  control: FormControl = new FormControl([0, 100000000]);
   options: Options = {
     floor: 0,
-    ceil: 20000000,
+    ceil: 100000000,
     translate: (value: number, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:

@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {Router} from '@angular/router';
-import {Subscription} from 'rxjs';
+import {interval, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-load-success',
@@ -11,7 +11,8 @@ import {Subscription} from 'rxjs';
 export class LoadSuccessComponent implements OnInit, OnDestroy {
   timeLeft = 10;
   subscription;
-
+  sub : Subscription;
+  public intervallTimer = interval(1000);
   constructor(
     private title: Title,
     private router: Router
@@ -19,18 +20,18 @@ export class LoadSuccessComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription = this.title.setTitle('Thông báo');
-    setInterval(() => {
+    this.title.setTitle('Thông báo');
+    this.sub = this.intervallTimer.subscribe(() => {
       if (this.timeLeft > 0) {
         this.timeLeft--;
       } else {
         this.router.navigate(['']);
       }
-    }, 1000);
+    });
   }
 
   ngOnDestroy(): void {
-      clearInterval(this.subscription);
+      this.sub.unsubscribe();
   }
 
 }

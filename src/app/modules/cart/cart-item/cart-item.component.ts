@@ -84,7 +84,7 @@ export class CartItemComponent implements OnInit, OnChanges {
   }
 
   goToOrder(): void{
-    if (this.productList.length === 0){
+    if (this.productList === undefined){
       this.toastr.error('Giỏ hàng của bạn rỗng!');
     }else{
       this.router.navigate(['/order']);

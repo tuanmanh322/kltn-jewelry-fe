@@ -91,13 +91,15 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       const d = new FormData();
       if (this.isFile === true) {
         d.append('imageFile', this.productEdit.get('image').value);
-      }else{
-        d.append('imageFile', JSON.stringify(this.pro.imageProduct));
+      } else {
+        d.append('imageProduct', this.pro.imageProduct);
       }
       d.append('id', JSON.stringify(this.pro.id));
       d.append('description', this.contentNews);
       d.append('idCategory', this.productEdit.get('idcate').value);
-      d.append('idSale', this.productEdit.get('idsale').value);
+      if (this.productEdit.get('idsale').value !== null && this.productEdit.get('idsale').value !== undefined) {
+        d.append('iSale', this.productEdit.get('idsale').value);
+      }
       d.append('idMark', this.productEdit.get('idmark').value);
       d.append('maSp', this.productEdit.get('masp').value);
       d.append('name', this.productEdit.get('namesp').value);
@@ -105,7 +107,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       d.append('totalItem', this.productEdit.get('totaltitem').value);
       d.append('idColor', this.productEdit.get('idco').value);
       this.apiService.post('/product/edit', d).subscribe(() => {
-        this.toastr.success('Thêm thành công');
+        this.toastr.success('Sửa thành công');
         this.apiService.onFilter('create');
         this.activeModal.dismiss();
       });

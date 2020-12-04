@@ -34,6 +34,8 @@
           <select formControlName="role" name="role">
             <option [value]="1">Quản trị</option>
             <option [value]="2">Khách</option>
+            <option [value]="3">Nhân viên</option>
+
           </select>
           <div class="text-danger" *ngIf="f.role.errors && (f.role.touched || f.role.dirty)">
             <div *ngIf="f.role.errors.required">Quyền không được bỏ trống!</div>

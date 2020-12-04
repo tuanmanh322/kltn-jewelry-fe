@@ -4,4 +4,6 @@ export interface CartDetailModel {
   price: number;
   quantity: number;
   image: string;
+  lastName: string;
+  firstName: string;
 }

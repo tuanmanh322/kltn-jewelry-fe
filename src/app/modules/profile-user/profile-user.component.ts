@@ -19,6 +19,8 @@ export class ProfileUserComponent implements OnInit {
   passwordForm: FormGroup;
   cartDetail: CartDetailModel[];
   isAdmin: boolean;
+  isStaff = false;
+
   constructor(
     private title: Title,
     private apiService: ApiService,
@@ -41,17 +43,38 @@ export class ProfileUserComponent implements OnInit {
       newPassword: new FormControl('', [Validators.required]),
     });
 
-    this.apiService.get('/cart/cart-list/' + this.userProfile.id).subscribe(data => {
-      this.cartDetail = data;
-    });
-    if (this.userProfile.userRole === 1){
+
+    if (this.userProfile.userRole === 1) {
       this.isAdmin = true;
+    }
+    if (this.userProfile.userRole === 3) {
+      this.isStaff = true;
+    }
+    switch (this.userProfile.userRole) {
+      case 2:
+        this.fetchGuest();
+        break;
+      case 3:
+        this.fetchStaff();
+        break;
     }
   }
 
 
   get f() {
     return this.userPForm.controls;
+  }
+
+  fetchStaff() {
+    this.apiService.get('/cart/cart-list/by-staff').subscribe(data => {
+      this.cartDetail = data;
+    });
+  }
+
+  fetchGuest() {
+    this.apiService.get('/cart/cart-list/' + this.userProfile.id).subscribe(data => {
+      this.cartDetail = data;
+    });
   }
 
   onSave() {

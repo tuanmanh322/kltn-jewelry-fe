@@ -1,6 +1,8 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {POT} from '../../share/model/jewelry.constant';
+import {UserProfileModel} from '../../share/model/user-profile.model';
+import {StorageService} from '../../share/service/storage.service';
 
 @Component({
   selector: 'app-admin',
@@ -12,8 +14,11 @@ import {POT} from '../../share/model/jewelry.constant';
 })
 export class AdminComponent implements OnInit, OnDestroy {
   pot = 1;
+  userModel: UserProfileModel;
+  isAdmin = false;
   constructor(
-    private title: Title
+    private title: Title,
+    private storageService: StorageService
   ) {
   }
 
@@ -52,6 +57,10 @@ export class AdminComponent implements OnInit, OnDestroy {
     //   }
     //   this.ele.classList.add('active');
     // }
+    this.userModel = this.storageService.getProfileJson();
+    if (this.userModel.userRole === 1){
+      this.isAdmin = true;
+    }
   }
 
   ngOnDestroy(): void {
@@ -59,6 +68,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   getPot(pot) {
+
     this.pot = pot;
     localStorage.setItem(POT, pot);
   }

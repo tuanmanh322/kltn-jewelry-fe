@@ -48,6 +48,8 @@
           <label class="column-labels">Quyền :</label>
           <input type="text" class="form-control" value="Khách" *ngIf="userProfile.userRole === 2"  disabled >
           <input type="text" class="form-control" value="Quản trị" *ngIf="userProfile.userRole === 1"  disabled >
+          <input type="text" class="form-control" value="Nhân viên" *ngIf="userProfile.userRole === 3"  disabled >
+
         </div>
         <div class="form-group">
           <input type="submit"   value="Lưu lại" class="btn btn-success">
@@ -85,13 +87,17 @@
     </div>
   </div>
   <hr>
-  <h3 align="center" *ngIf="!isAdmin">Sản phẩm đã đặt</h3>
+  <h3 align="center" *ngIf="!isAdmin">
+    <span *ngIf="isStaff">Số sản phẩm đã bán trong ngày</span>
+    <span *ngIf="!isStaff">Số sản phẩm đã đặt hàng</span>
+  </h3>
   <div class="row" *ngIf="!isAdmin">
     <div class="col-12">
       <table class="table table-striped">
         <thead>
         <tr>
           <th scope="col">TT</th>
+          <th scope="col" *ngIf="isStaff">Khách hàng</th>
           <th scope="col">Tên sản phẩm </th>
           <th scope="col">Giá </th>
           <th scope="col">Số lương </th>
@@ -101,6 +107,7 @@
         <tbody>
         <tr *ngFor="let ca of cartDetail; let i = index">
           <td scope="row">{{i+1}}</td>
+          <td *ngIf="isStaff">{{ca.firstName}} {{ca.lastName}}</td>
           <td class="data-name">{{ca.name}}</td>
           <td>{{ca.price | vndTransfer}}</td>
           <td>{{ca.quantity}}</td>

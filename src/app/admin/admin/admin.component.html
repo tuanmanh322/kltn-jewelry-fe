@@ -10,29 +10,47 @@
   <div class="row">
     <div class="col-2">
       <div class="list-group" id="list-tab" role="tablist">
-        <a class="list-group-item list-group-item-action active"   data-toggle="list" href="#/admin/user/list" role="tab" aria-controls="home" id="tab1" (click)="getPot(1)">Quản lý user</a>
-        <a class="list-group-item list-group-item-action"  data-toggle="list" href="#/admin/category/list" role="tab" aria-controls="profile" id="tab2" (click)="getPot(2)">Quản lý danh mục</a>
-        <a class="list-group-item list-group-item-action"  data-toggle="list" href="#/admin/product/list" role="tab" aria-controls="messages" id="tab3" (click)="getPot(3)">Quản lý sản phẩm</a>
-        <a class="list-group-item list-group-item-action"  data-toggle="list" href="#/admin/contact/list" role="tab" aria-controls="settings" id="tab4" (click)="getPot(4)">Quản lý liên hệ</a>
-        <a class="list-group-item list-group-item-action"  data-toggle="list" href="#/admin/order/list" role="tab" aria-controls="settings" id="tab5" (click)="getPot(5)">Quản lý đặt hàng</a>
-        <a class="list-group-item list-group-item-action"  data-toggle="list" href="#/admin/news/list" role="tab" aria-controls="settings" id="tab6" (click)="getPot(6)">Quản lý tin tức</a>
-        <a class="list-group-item list-group-item-action"  data-toggle="list" href="#/admin/sale/list" role="tab" aria-controls="settings" id="tab7" (click)="getPot(7)">Quản lý sale</a>
-        <a class="list-group-item list-group-item-action"  data-toggle="list" href="#/admin/category/list" role="tab" aria-controls="settings" id="tab8"  (click)="getPot(8)">Quản lý thương hiệu</a>
-        <a class="list-group-item list-group-item-action"  data-toggle="list" href="#/admin/type/list" role="tab" aria-controls="settings" id="tab9" (click)="getPot(9)">Quản lý chất liệu</a>
+        <a class="list-group-item list-group-item-action active"   data-toggle="list" href="#/admin/user/list" role="tab" aria-controls="home" id="tab1" (click)="getPot(1)" *ngIf="isAdmin">Quản lý user</a>
+        <a class="list-group-item list-group-item-action"  data-toggle="list" href="#/admin/category/list" role="tab" aria-controls="profile" id="tab2" (click)="getPot(2)" *ngIf="!isAdmin">Quản lý danh mục</a>
+        <a class="list-group-item list-group-item-action"  data-toggle="list" href="#/admin/product/list" role="tab" aria-controls="messages" id="tab3" (click)="getPot(3)" *ngIf="!isAdmin">Quản lý sản phẩm</a>
+        <a class="list-group-item list-group-item-action"  data-toggle="list" href="#/admin/contact/list" role="tab" aria-controls="settings" id="tab4" (click)="getPot(4)" *ngIf="!isAdmin">Quản lý liên hệ</a>
+        <a class="list-group-item list-group-item-action"  data-toggle="list" href="#/admin/order/list" role="tab" aria-controls="settings" id="tab5" (click)="getPot(5)" *ngIf="isAdmin">Quản lý đặt hàng</a>
+        <a class="list-group-item list-group-item-action"  data-toggle="list" href="#/admin/news/list" role="tab" aria-controls="settings" id="tab6" (click)="getPot(6)" *ngIf="!isAdmin">Quản lý tin tức</a>
+        <a class="list-group-item list-group-item-action"  data-toggle="list" href="#/admin/sale/list" role="tab" aria-controls="settings" id="tab7" (click)="getPot(7)" *ngIf="!isAdmin">Quản lý sale</a>
+        <a class="list-group-item list-group-item-action"  data-toggle="list" href="#/admin/category/list" role="tab" aria-controls="settings" id="tab8"  (click)="getPot(8)" *ngIf="!isAdmin">Quản lý thương hiệu</a>
+        <a class="list-group-item list-group-item-action"  data-toggle="list" href="#/admin/type/list" role="tab" aria-controls="settings" id="tab9" (click)="getPot(9)" *ngIf="!isAdmin">Quản lý chất liệu</a>
 <!--        <a class="list-group-item list-group-item-action"  data-toggle="list" href="/admin/user/list" role="tab" aria-controls="settings">Quản lý giỏ hàng</a>-->
       </div>
     </div>
     <div class="col-10">
         <div ngSwitch="{{pot}}">
-          <app-user-list *ngSwitchCase="1"></app-user-list>
-          <app-list-category *ngSwitchCase="2"></app-list-category>
-          <app-product-list-admin *ngSwitchCase="3"></app-product-list-admin>
-          <app-contact-list *ngSwitchCase="4"></app-contact-list>
-          <app-order-list *ngSwitchCase="5"></app-order-list>
-          <app-news-list *ngSwitchCase="6"></app-news-list>
-          <app-sale-list *ngSwitchCase="7"></app-sale-list>
-          <app-trade-list *ngSwitchCase="8"></app-trade-list>
-          <app-color-list *ngSwitchCase="9"></app-color-list>
+          <div *ngIf="isAdmin">
+            <app-user-list *ngSwitchCase="1" ></app-user-list>
+          </div>
+          <div>
+            <app-list-category *ngSwitchCase="2"></app-list-category>
+          </div>
+          <div>
+            <app-product-list-admin *ngSwitchCase="3"></app-product-list-admin>
+          </div>
+          <div>
+            <app-contact-list *ngSwitchCase="4"></app-contact-list>
+          </div>
+          <div>
+            <app-order-list *ngSwitchCase="5"></app-order-list>
+          </div>
+          <div>
+            <app-news-list *ngSwitchCase="6"></app-news-list>
+          </div>
+          <div>
+            <app-sale-list *ngSwitchCase="7"></app-sale-list>
+          </div>
+          <div>
+            <app-trade-list *ngSwitchCase="8"></app-trade-list>
+          </div>
+          <div>
+            <app-color-list *ngSwitchCase="9"></app-color-list>
+          </div>
         </div>
     </div>
   </div>

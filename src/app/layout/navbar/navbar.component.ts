@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 import {AuthService} from '../../share/service/auth.service';
-import {ADMIN, PRODUCT, ROLE, TITLE, USER_PROFILE_CHANGED} from '../../share/model/jewelry.constant';
+import {ADMIN, PRODUCT, ROLE, STAFF, TITLE, USER_PROFILE_CHANGED} from '../../share/model/jewelry.constant';
 import {EventManagement} from '../../share/service/event.managements';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
@@ -147,7 +147,7 @@ export class NavbarComponent implements OnInit {
       this.isAuthenticate = true;
       localStorage.removeItem(ROLE);
       localStorage.setItem(ROLE, this.userProfile.userRoleName);
-      if (localStorage.getItem(ROLE) === ADMIN) {
+      if (localStorage.getItem(ROLE) === ADMIN || localStorage.getItem(ROLE) === STAFF ) {
         this.isAdmin = true;
       }
     });

@@ -74,8 +74,6 @@ export class CartItemComponent implements OnInit, OnChanges {
   fetchData(): void {
     if (localStorage.getItem(PRODUCT)) {
       this.productList = JSON.parse(localStorage.getItem(PRODUCT));
-    } else {
-      this.productList.length = 0;
     }
     this.priceTotal = 0;
     this.productList.forEach(pro => {

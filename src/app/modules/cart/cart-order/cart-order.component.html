@@ -61,7 +61,7 @@
       </div>
     </div>
     <div class="col-4">
-      <form [formGroup]="orderForm" *ngIf="!isLogin">
+      <form [formGroup]="orderForm" *ngIf="!isLogin" (ngSubmit)="onOrder()">
         <div class="form-group">
           <label>Họ và tên(*): </label>
           <input type="text" class="form-control" placeholder="Nhập họ và tên" formControlName="hoten" name="hoten">

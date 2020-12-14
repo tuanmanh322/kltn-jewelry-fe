@@ -57,7 +57,7 @@ export class OrderListComponent implements OnInit, OnDestroy {
   }
 
   de(id): void {
-    this.apiService.delete('/contact/delete/' + id).subscribe(() => {
+    this.apiService.delete('/order/delete/' + id).subscribe(() => {
       this.toastr.success('Xoá thành công');
       this.fetch();
     });
